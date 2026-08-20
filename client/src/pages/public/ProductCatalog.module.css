@@ -1,0 +1,214 @@
+.catalog {
+  padding: var(--space-8) 0;
+  min-height: calc(100vh - 64px);
+  background-color: var(--paper-white);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--ink-navy);
+  margin-bottom: var(--space-8);
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.searchForm {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.searchInput {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--slate-gray);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--poly-sheen);
+  box-shadow: 0 0 0 3px rgba(47, 134, 235, 0.1);
+}
+
+.searchBtn {
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--poly-sheen);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.searchBtn:hover {
+  background-color: #2474d4;
+}
+
+.categoryFilter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.filterLabel {
+  font-weight: 500;
+  color: var(--slate-gray);
+}
+
+.categoryButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.categoryBtn {
+  padding: var(--space-2) var(--space-4);
+  background-color: white;
+  border: 1px solid var(--slate-gray);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.categoryBtn:hover {
+  border-color: var(--poly-sheen);
+  color: var(--poly-sheen);
+}
+
+.categoryBtnActive {
+  background-color: var(--poly-sheen);
+  border-color: var(--poly-sheen);
+  color: white;
+}
+
+.loading,
+.noData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
+  color: var(--slate-gray);
+  font-size: var(--text-lg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cardImage {
+  height: 200px;
+  background-color: var(--frost-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholderImage {
+  font-size: 4rem;
+  opacity: 0.5;
+}
+
+.cardContent {
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink-navy);
+  margin: 0;
+}
+
+.specStrip {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--slate-gray);
+  background-color: var(--frost-white);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+}
+
+.priceInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.price {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--resin-blue);
+}
+
+.moq {
+  font-size: var(--text-xs);
+  color: var(--slate-gray);
+}
+
+.bargainingBadge {
+  font-size: var(--text-xs);
+  color: var(--poly-sheen);
+  background-color: rgba(47, 134, 235, 0.1);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .searchForm {
+    flex-direction: column;
+  }
+}

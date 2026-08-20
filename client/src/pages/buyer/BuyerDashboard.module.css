@@ -1,0 +1,231 @@
+.dashboard {
+  padding: var(--space-8) 0;
+  min-height: calc(100vh - 64px);
+  background-color: var(--paper-white);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-8);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--ink-navy);
+  margin: 0;
+}
+
+.newOrderBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--poly-sheen);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast);
+}
+
+.newOrderBtn:hover {
+  background-color: #2474d4;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-6);
+  background-color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.statValue {
+  font-family: var(--font-mono);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--poly-sheen);
+}
+
+.statLabel {
+  font-size: var(--text-sm);
+  color: var(--slate-gray);
+  text-align: center;
+}
+
+.ordersSection {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--ink-navy);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.loading,
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
+  color: var(--slate-gray);
+}
+
+.browseLink {
+  margin-top: var(--space-4);
+  color: var(--poly-sheen);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.browseLink:hover {
+  text-decoration: underline;
+}
+
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.orderCard {
+  border: 1px solid var(--frost-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  transition: box-shadow var(--transition-fast);
+}
+
+.orderCard:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-3);
+}
+
+.orderId {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--ink-navy);
+}
+
+.statusBadge {
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+.statusBadge.quote_requested {
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.statusBadge.negotiating {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+.statusBadge.confirmed {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.statusBadge.in_production {
+  background-color: #e0e7ff;
+  color: #4f46e5;
+}
+
+.statusBadge.ready {
+  background-color: #ccfbf1;
+  color: #0d9488;
+}
+
+.statusBadge.dispatched {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.statusBadge.cancelled {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.orderInfo {
+  margin-bottom: var(--space-3);
+}
+
+.productName {
+  font-weight: 600;
+  color: var(--ink-navy);
+  margin: 0 0 var(--space-1) 0;
+}
+
+.orderDetails {
+  font-size: var(--text-sm);
+  color: var(--slate-gray);
+  margin: 0;
+}
+
+.price {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--resin-blue);
+  margin: var(--space-1) 0 0 0;
+}
+
+.orderFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orderDate {
+  font-size: var(--text-sm);
+  color: var(--slate-gray);
+}
+
+.viewBtn {
+  font-size: var(--text-sm);
+  color: var(--poly-sheen);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.viewBtn:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-4);
+  }
+
+  .newOrderBtn {
+    text-align: center;
+  }
+}

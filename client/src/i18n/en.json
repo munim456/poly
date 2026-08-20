@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "login": "Login",
+    "register": "Register",
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "home": {
+    "hero": {
+      "title": "Industrial Poly Packaging Solutions",
+      "subtitle": "Manufacturing high-quality HDPE, LDPE, BOPP products and PP yarn for Bangladesh's RMG and industrial sectors",
+      "cta": "View Products",
+      "ctaSecondary": "Request Quote"
+    },
+    "categories": {
+      "title": "Product Categories",
+      "hdpe_bags": "HDPE Woven Sacks",
+      "bopp_film": "BOPP Film",
+      "yarn": "PP Yarn",
+      "ldpe_film": "LDPE Film"
+    },
+    "trust": {
+      "title": "Trusted by Industry Leaders",
+      "certified": "ISO Certified",
+      "experience": "15+ Years Experience",
+      "quality": "Quality Assured"
+    }
+  },
+  "products": {
+    "title": "Our Products",
+    "filter": "Filter by Category",
+    "all": "All Products",
+    "search": "Search products...",
+    "moq": "MOQ",
+    "price": "Price",
+    "spec": "Specifications",
+    "viewDetails": "View Details",
+    "requestQuote": "Request Quote"
+  },
+  "product": {
+    "specifications": "Technical Specifications",
+    "quality": "Quality Data",
+    "pricing": "Pricing",
+    "regular": "Regular",
+    "wholesale": "Wholesale",
+    "regularPrice": "Regular Price",
+    "wholesalePrice": "Wholesale Price",
+    "moq": "Minimum Order Quantity",
+    "bargaining": "Price negotiation available",
+    "noBargaining": "Fixed price only",
+    "placeOrder": "Place Order",
+    "requestQuote": "Request Quote"
+  },
+  "order": {
+    "title": "Place Order / Request Quote",
+    "purchaseType": "Purchase Type",
+    "quantity": "Quantity",
+    "deliveryDate": "Preferred Delivery Date",
+    "notes": "Additional Notes",
+    "proposePrice": "Propose Your Price (Optional)",
+    "priceNote": "Leave empty for standard pricing",
+    "submit": "Submit Order",
+    "status": {
+      "quote_requested": "Quote Requested",
+      "negotiating": "In Negotiation",
+      "confirmed": "Order Confirmed",
+      "in_production": "In Production",
+      "ready": "Ready for Dispatch",
+      "dispatched": "Dispatched",
+      "cancelled": "Cancelled"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Login",
+      "noAccount": "Don't have an account?",
+      "register": "Register here"
+    },
+    "register": {
+      "title": "Create Account",
+      "companyName": "Company Name",
+      "contactPerson": "Contact Person",
+      "phone": "Phone",
+      "email": "Email",
+      "password": "Password",
+      "address": "Address",
+      "city": "City",
+      "submit": "Register",
+      "hasAccount": "Already have an account?",
+      "login": "Login here"
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "orders": "My Orders",
+    "profile": "My Profile",
+    "stats": {
+      "totalOrders": "Total Orders",
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "delivered": "Delivered"
+    }
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "products": "Products",
+    "orders": "Orders",
+    "quality": "Quality Approvals",
+    "staff": "Staff Management",
+    "buyers": "Buyers",
+    "stats": {
+      "totalProducts": "Total Products",
+      "pendingOrders": "Pending Orders",
+      "pendingQuality": "Pending Quality Approvals",
+      "totalBuyers": "Total Buyers"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "approve": "Approve",
+    "reject": "Reject",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "search": "Search",
+    "noData": "No data available"
+  },
+  "footer": {
+    "about": "About PolyConnect",
+    "aboutText": "Leading manufacturer of poly packaging materials and textile raw materials in Bangladesh.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact Us",
+    "address": "Dhaka, Bangladesh",
+    "phone": "+880 1XXXXXXXXX",
+    "email": "info@polyconnect.com",
+    "copyright": "© 2024 PolyConnect. All rights reserved."
+  }
+}

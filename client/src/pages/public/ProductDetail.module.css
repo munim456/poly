@@ -1,0 +1,349 @@
+.detail {
+  padding: var(--space-8) 0;
+  min-height: calc(100vh - 64px);
+  background-color: var(--paper-white);
+}
+
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
+  color: var(--slate-gray);
+  font-size: var(--text-lg);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  color: var(--poly-sheen);
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: var(--space-6);
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+}
+
+.imageSection {
+  position: sticky;
+  top: 80px;
+  align-self: start;
+}
+
+.mainImage {
+  background-color: var(--frost-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholderImage {
+  font-size: 6rem;
+  opacity: 0.5;
+}
+
+.thumbnails {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.thumbnail {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color var(--transition-fast);
+}
+
+.thumbnail:hover {
+  border-color: var(--poly-sheen);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.infoSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--ink-navy);
+  margin: 0;
+}
+
+.category {
+  font-size: var(--text-sm);
+  color: var(--poly-sheen);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.description {
+  color: var(--slate-gray);
+  line-height: 1.6;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--ink-navy);
+  margin: 0 0 var(--space-4) 0;
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid var(--frost-white);
+}
+
+/* Specs Table */
+.specsSection {
+  background-color: white;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.specsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.specsTable tr {
+  border-bottom: 1px solid var(--frost-white);
+}
+
+.specsTable tr:last-child {
+  border-bottom: none;
+}
+
+.specLabel,
+.specValue {
+  padding: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.specLabel {
+  color: var(--slate-gray);
+  width: 40%;
+}
+
+.specValue {
+  color: var(--ink-navy);
+  font-weight: 500;
+}
+
+/* Pricing */
+.pricingSection {
+  background-color: white;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.pricingCard {
+  padding: var(--space-4);
+  border: 1px solid var(--frost-white);
+  border-radius: var(--radius-md);
+}
+
+.pricingCardHighlighted {
+  border-color: var(--poly-sheen);
+  background-color: rgba(47, 134, 235, 0.05);
+}
+
+.pricingTitle {
+  font-size: var(--text-sm);
+  color: var(--slate-gray);
+  margin: 0 0 var(--space-3) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.priceMain {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+}
+
+.currency {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  color: var(--resin-blue);
+}
+
+.amount {
+  font-family: var(--font-mono);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--resin-blue);
+}
+
+.unit {
+  font-size: var(--text-sm);
+  color: var(--slate-gray);
+}
+
+.tiers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.tier {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.tierQty {
+  color: var(--slate-gray);
+}
+
+.tierPrice {
+  color: var(--resin-blue);
+  font-weight: 500;
+}
+
+.moq {
+  font-size: var(--text-xs);
+  color: var(--slate-gray);
+  margin: var(--space-3) 0 0 0;
+}
+
+.bargainingInfo {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--poly-sheen);
+}
+
+/* Quality */
+.qualitySection {
+  background-color: white;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.qualityCard {
+  border: 1px solid var(--frost-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.qualityHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.batchDate {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--slate-gray);
+}
+
+.qualityBadge {
+  font-size: var(--text-xs);
+  color: #10b981;
+  background-color: rgba(16, 185, 129, 0.1);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+.qualitySpecs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-3);
+}
+
+.qualitySpec {
+  display: flex;
+  flex-direction: column;
+}
+
+.qualitySpecLabel {
+  font-size: var(--text-xs);
+  color: var(--slate-gray);
+  text-transform: capitalize;
+}
+
+.qualitySpecValue {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--ink-navy);
+}
+
+/* CTA */
+.ctaSection {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) var(--space-8);
+  background-color: var(--poly-sheen);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  flex: 1;
+}
+
+.btnPrimary:hover {
+  background-color: #2474d4;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .imageSection {
+    position: static;
+  }
+
+  .pricingGrid {
+    grid-template-columns: 1fr;
+  }
+}

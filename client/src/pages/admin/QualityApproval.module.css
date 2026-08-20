@@ -1,0 +1,143 @@
+.page {
+  padding: var(--space-8) 0;
+  min-height: calc(100vh - 64px);
+  background-color: var(--paper-white);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--ink-navy);
+  margin: 0 0 var(--space-8) 0;
+}
+
+.loading,
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
+  color: var(--slate-gray);
+  font-size: var(--text-lg);
+  background-color: white;
+  border-radius: var(--radius-lg);
+}
+
+.batchesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.batchCard {
+  background-color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+
+.batchHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-4);
+}
+
+.productName {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink-navy);
+  margin: 0 0 var(--space-1) 0;
+}
+
+.batchInfo {
+  font-size: var(--text-sm);
+  color: var(--slate-gray);
+  margin: 0;
+}
+
+.pendingBadge {
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  background-color: #fef3c7;
+  color: #d97706;
+}
+
+.specsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.specItem {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3);
+  background-color: var(--frost-white);
+  border-radius: var(--radius-md);
+}
+
+.specLabel {
+  font-size: var(--text-xs);
+  color: var(--slate-gray);
+  text-transform: capitalize;
+  margin-bottom: var(--space-1);
+}
+
+.specValue {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--ink-navy);
+}
+
+.certLink {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  color: var(--poly-sheen);
+  text-decoration: none;
+  font-size: var(--text-sm);
+}
+
+.certLink:hover {
+  text-decoration: underline;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--frost-white);
+}
+
+.approveBtn,
+.rejectBtn {
+  padding: var(--space-2) var(--space-6);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.approveBtn {
+  background-color: #10b981;
+  color: white;
+}
+
+.approveBtn:hover {
+  background-color: #059669;
+}
+
+.rejectBtn {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.rejectBtn:hover {
+  background-color: #fecaca;
+}

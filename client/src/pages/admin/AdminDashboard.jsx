@@ -1,0 +1,79 @@
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useLanguage } from '../../context/LanguageContext'
+import api from '../../services/api'
+import styles from './AdminDashboard.module.css'
+
+function AdminDashboard() {
+  const { t } = useLanguage()
+  const [stats, setStats] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchStats()
+  }, [])
+
+  const fetchStats = async () => {
+    try {
+      const res = await api.get('/admin/dashboard')
+      setStats(res.data.stats)
+    } catch (error) {
+      console.error('Failed to fetch stats:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  if (loading) {
+    return <div className={styles.loading}>{t('common.loading')}</div>
+  }
+
+  return (
+    <div className={styles.dashboard}>
+      <div className="container">
+        <h1 className={styles.title}>{t('admin.dashboard')}</h1>
+
+        {/* Stats Grid */}
+        <div className={styles.statsGrid}>
+          <Link to="/admin/products" className={styles.statCard}>
+            <span className={styles.statValue}>{stats?.totalProducts || 0}</span>
+            <span className={styles.statLabel}>{t('admin.stats.totalProducts')}</span>
+          </Link>
+          <Link to="/admin/orders" className={styles.statCard}>
+            <span className={styles.statValue}>{stats?.pendingOrders || 0}</span>
+            <span className={styles.statLabel}>{t('admin.stats.pendingOrders')}</span>
+          </Link>
+          <Link to="/admin/quality" className={styles.statCard}>
+            <span className={styles.statValue}>{stats?.pendingQualityBatches || 0}</span>
+            <span className={styles.statLabel}>{t('admin.stats.pendingQuality')}</span>
+          </Link>
+          <div className={styles.statCard}>
+            <span className={styles.statValue}>{stats?.totalBuyers || 0}</span>
+            <span className={styles.statLabel}>{t('admin.stats.totalBuyers')}</span>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className={styles.actionsSection}>
+          <h2 className={styles.sectionTitle}>Quick Actions</h2>
+          <div className={styles.actionsGrid}>
+            <Link to="/admin/products" className={styles.actionCard}>
+              <span className={styles.actionIcon}>📦</span>
+              <span className={styles.actionTitle}>Manage Products</span>
+            </Link>
+            <Link to="/admin/quality" className={styles.actionCard}>
+              <span className={styles.actionIcon}>✓</span>
+              <span className={styles.actionTitle}>Approve Quality Data</span>
+            </Link>
+            <Link to="/admin/staff" className={styles.actionCard}>
+              <span className={styles.actionIcon}>👥</span>
+              <span className={styles.actionTitle}>Manage Staff</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default AdminDashboard

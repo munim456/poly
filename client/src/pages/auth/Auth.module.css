@@ -1,0 +1,126 @@
+.authPage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px);
+  padding: var(--space-8);
+  background-color: var(--frost-white);
+}
+
+.authCard {
+  width: 100%;
+  max-width: 480px;
+  padding: var(--space-8);
+  background-color: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--ink-navy);
+  text-align: center;
+  margin: 0 0 var(--space-6) 0;
+}
+
+.error {
+  padding: var(--space-3);
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md);
+  color: #dc2626;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.label {
+  font-weight: 500;
+  color: var(--ink-navy);
+  font-size: var(--text-sm);
+}
+
+.input {
+  padding: var(--space-3);
+  border: 1px solid var(--slate-gray);
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+  transition: all var(--transition-fast);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--poly-sheen);
+  box-shadow: 0 0 0 3px rgba(47, 134, 235, 0.1);
+}
+
+.submitBtn {
+  padding: var(--space-3);
+  background-color: var(--poly-sheen);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-base);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  margin-top: var(--space-2);
+}
+
+.submitBtn:hover:not(:disabled) {
+  background-color: #2474d4;
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.switchText {
+  text-align: center;
+  margin-top: var(--space-6);
+  color: var(--slate-gray);
+}
+
+.switchLink {
+  color: var(--poly-sheen);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.switchLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .authPage {
+    padding: var(--space-4);
+  }
+
+  .authCard {
+    padding: var(--space-6);
+  }
+
+  .fieldRow {
+    grid-template-columns: 1fr;
+  }
+}
