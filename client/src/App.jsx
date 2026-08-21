@@ -28,6 +28,7 @@ import QualityDashboard from './pages/staff/QualityDashboard'
 
 // Admin pages
 import AdminDashboard from './pages/admin/AdminDashboard'
+import Analytics from './pages/admin/Analytics'
 import ProductManagement from './pages/admin/ProductManagement'
 import QualityApproval from './pages/admin/QualityApproval'
 import StaffManagement from './pages/admin/StaffManagement'
@@ -116,6 +117,14 @@ function App() {
                   element={
                     <ProtectedRoute roles={['owner']}>
                       <AdminDashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/admin/analytics"
+                  element={
+                    <ProtectedRoute roles={['owner']}>
+                      <Analytics />
                     </ProtectedRoute>
                   }
                 />

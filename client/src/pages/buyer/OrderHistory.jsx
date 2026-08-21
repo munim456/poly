@@ -85,20 +85,20 @@ function OrderHistory() {
           {/* Order Details */}
           <div className={styles.detailsSection}>
             <div className={styles.card}>
-              <h2 className={styles.cardTitle}>Product Details</h2>
+              <h2 className={styles.cardTitle}>{t('oh.productDetails')}</h2>
               <p className={styles.productName}>{order.product_name}</p>
               <div className={styles.detailsGrid}>
                 <div className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Quantity</span>
+                  <span className={styles.detailLabel}>{t('order.quantity')}</span>
                   <span className={styles.detailValue}>{order.quantity} kg</span>
                 </div>
                 <div className={styles.detailItem}>
-                  <span className={styles.detailLabel}>Purchase Type</span>
+                  <span className={styles.detailLabel}>{t('order.purchaseType')}</span>
                   <span className={styles.detailValue}>{order.purchase_type}</span>
                 </div>
                 {order.delivery_deadline && (
                   <div className={styles.detailItem}>
-                    <span className={styles.detailLabel}>Delivery Date</span>
+                    <span className={styles.detailLabel}>{t('order.deliveryDate')}</span>
                     <span className={styles.detailValue}>
                       {new Date(order.delivery_deadline).toLocaleDateString()}
                     </span>
@@ -107,7 +107,7 @@ function OrderHistory() {
               </div>
               {order.notes && (
                 <div className={styles.notes}>
-                  <span className={styles.notesLabel}>Notes:</span>
+                  <span className={styles.notesLabel}>{t('order.notes')}:</span>
                   <p>{order.notes}</p>
                 </div>
               )}
@@ -115,23 +115,23 @@ function OrderHistory() {
 
             {/* Pricing */}
             <div className={styles.card}>
-              <h2 className={styles.cardTitle}>Pricing</h2>
+              <h2 className={styles.cardTitle}>{t('oh.pricing')}</h2>
               <div className={styles.pricingGrid}>
                 {order.requested_price && (
                   <div className={styles.priceItem}>
-                    <span className={styles.priceLabel}>Your Requested Price</span>
+                    <span className={styles.priceLabel}>{t('oh.yourRequestedPrice')}</span>
                     <span className={styles.priceValue}>৳{order.requested_price}/kg</span>
                   </div>
                 )}
                 {order.current_offer_price && (
                   <div className={styles.priceItem}>
-                    <span className={styles.priceLabel}>Current Offer</span>
+                    <span className={styles.priceLabel}>{t('oh.currentOffer')}</span>
                     <span className={styles.priceValue}>৳{order.current_offer_price}/kg</span>
                   </div>
                 )}
                 {order.final_agreed_price && (
                   <div className={styles.priceItem}>
-                    <span className={styles.priceLabel}>Final Price</span>
+                    <span className={styles.priceLabel}>{t('oh.finalPrice')}</span>
                     <span className={styles.priceValue}>৳{order.final_agreed_price}/kg</span>
                   </div>
                 )}
@@ -142,7 +142,7 @@ function OrderHistory() {
           {/* Negotiation Thread */}
           <div className={styles.negotiationSection}>
             <div className={styles.card}>
-              <h2 className={styles.cardTitle}>Negotiation</h2>
+              <h2 className={styles.cardTitle}>{t('oh.negotiation')}</h2>
               
               {negotiation ? (
                 <>

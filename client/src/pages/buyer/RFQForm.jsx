@@ -73,7 +73,7 @@ function RFQForm() {
         <form onSubmit={handleSubmit} className={styles.form}>
           {/* Product Selection */}
           <div className={styles.field}>
-            <label className={styles.label}>Product *</label>
+            <label className={styles.label}>{t('form.product')}</label>
             <select
               name="product_id"
               value={formData.product_id}
@@ -81,7 +81,7 @@ function RFQForm() {
               className={styles.select}
               required
             >
-              <option value="">Select a product</option>
+              <option value="">{t('form.selectProduct')}</option>
               {products.map(product => (
                 <option key={product.id} value={product.id}>
                   {product.name} (MOQ: {product.regular_moq} kg)
@@ -184,7 +184,7 @@ function RFQForm() {
               onChange={handleChange}
               className={styles.textarea}
               rows={4}
-              placeholder="Any special requirements or notes..."
+              placeholder={t('order.notes')}
             />
           </div>
 

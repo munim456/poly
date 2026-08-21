@@ -76,8 +76,8 @@ function BuyerDashboard() {
             <div className={styles.loading}>{t('common.loading')}</div>
           ) : orders.length === 0 ? (
             <div className={styles.empty}>
-              <p>No orders yet</p>
-              <Link to="/products" className={styles.browseLink}>Browse Products</Link>
+              <p>{t('buyerDash.noOrders')}</p>
+              <Link to="/products" className={styles.browseLink}>{t('nav.products')}</Link>
             </div>
           ) : (
             <div className={styles.ordersList}>

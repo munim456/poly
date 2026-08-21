@@ -50,7 +50,7 @@ function QualityApproval() {
         {loading ? (
           <div className={styles.loading}>{t('common.loading')}</div>
         ) : pendingBatches.length === 0 ? (
-          <div className={styles.empty}>No pending quality batches to approve</div>
+          <div className={styles.empty}>{t('qa.empty')}</div>
         ) : (
           <div className={styles.batchesList}>
             {pendingBatches.map(batch => (
@@ -63,7 +63,7 @@ function QualityApproval() {
                       Tested by: {batch.tested_by_name}
                     </p>
                   </div>
-                  <span className={styles.pendingBadge}>Pending</span>
+                  <span className={styles.pendingBadge}>{t('qa.pending')}</span>
                 </div>
 
                 <div className={styles.specsGrid}>

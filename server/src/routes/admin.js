@@ -150,4 +150,89 @@ router.get('/orders', async (req, res) => {
   }
 })
 
+// GET /api/admin/analytics (owner analytics)
+router.get('/analytics', async (req, res) => {
+  try {
+    const revenueStatuses = ['confirmed', 'in_production', 'ready', 'dispatched']
+
+    const [
+      revenueRow,
+      statusBreakdown,
+      topProducts,
+      monthlyTrend,
+      buyerStats,
+    ] = await Promise.all([
+      db('orders')
+        .whereIn('status', revenueStatuses)
+        .whereNotNull('final_agreed_price')
+        .sum({ revenue: db.raw('final_agreed_price * quantity') })
+        .avg({ avg_order_value: db.raw('final_agreed_price * quantity') })
+        .count('id as count')
+        .first(),
+      db('orders').select('status').count('id as count').groupBy('status'),
+      db('orders as o')
+        .join('products as p', 'o.product_id', 'p.id')
+        .select('p.name as product_name', 'p.category')
+        .count('o.id as order_count')
+        .sum('o.quantity as total_quantity')
+        .groupBy('p.id', 'p.name', 'p.category')
+        .orderBy('order_count', 'desc')
+        .limit(5),
+      db('orders')
+        .select(db.raw("to_char(date_trunc('month', created_at), 'YYYY-MM') as month"))
+        .count('id as order_count')
+        .sum({
+          revenue: db.raw(
+            "CASE WHEN status IN ('confirmed', 'in_production', 'ready', 'dispatched') AND final_agreed_price IS NOT NULL THEN final_agreed_price * quantity ELSE 0 END"
+          ),
+        })
+        .whereRaw("created_at >= date_trunc('month', now()) - interval '5 months'")
+        .groupBy(db.raw("date_trunc('month', created_at)"))
+        .orderBy(db.raw("date_trunc('month', created_at)")),
+      db('buyer_accounts')
+        .count('id as total_buyers')
+        .count({
+          verified: db.raw("CASE WHEN verification_status = 'verified' THEN 1 END"),
+        })
+        .first(),
+    ])
+
+    const totalOrders = statusBreakdown.reduce((sum, s) => sum + parseInt(s.count), 0)
+    const confirmedOrders = statusBreakdown
+      .filter((s) => revenueStatuses.includes(s.status))
+      .reduce((sum, s) => sum + parseInt(s.count), 0)
+
+    res.json({
+      analytics: {
+        kpis: {
+          totalRevenue: parseFloat(revenueRow.revenue) || 0,
+          avgOrderValue: Math.round(parseFloat(revenueRow.avg_order_value)) || 0,
+          confirmedOrders,
+          conversionRate: totalOrders ? Math.round((confirmedOrders / totalOrders) * 100) : 0,
+          totalBuyers: parseInt(buyerStats.total_buyers),
+          verifiedBuyers: parseInt(buyerStats.verified),
+        },
+        statusBreakdown: statusBreakdown.map((s) => ({
+          status: s.status,
+          count: parseInt(s.count),
+        })),
+        topProducts: topProducts.map((p) => ({
+          productName: p.product_name,
+          category: p.category,
+          orderCount: parseInt(p.order_count),
+          totalQuantity: parseInt(p.total_quantity) || 0,
+        })),
+        monthlyTrend: monthlyTrend.map((m) => ({
+          month: m.month,
+          orderCount: parseInt(m.order_count),
+          revenue: parseFloat(m.revenue) || 0,
+        })),
+      },
+    })
+  } catch (error) {
+    console.error('Analytics fetch error:', error)
+    res.status(500).json({ error: 'Failed to fetch analytics' })
+  }
+})
+
 export default router

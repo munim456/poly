@@ -1,3 +1,4 @@
+import { useLanguage } from '../../context/LanguageContext'
 import {
   ShieldCheckIcon,
   MapPinIcon,
@@ -10,13 +11,14 @@ import { CONTACT } from '../../config/contact'
 import styles from './About.module.css'
 
 function FacilityDrawing() {
+  const { t } = useLanguage()
   return (
     <svg
       className={styles.drawing}
       viewBox="0 0 480 360"
       fill="none"
       role="img"
-      aria-label="Technical drawing of the manufacturing facility"
+      aria-label={t('about.facilityDrawing')}
     >
       <g stroke="currentColor" strokeWidth="1.5">
         <path d="M60 300V160l90 56v-56l90 56v-56l90 56v84H60Z" />
@@ -30,34 +32,26 @@ function FacilityDrawing() {
         <path d="M40 332h400" />
         <path d="M40 326v12M440 326v12" />
       </g>
-      <text x="240" y="352" textAnchor="middle" className={styles.dimText}>POLYNAGAR PLANT — HALL A</text>
+      <text x="240" y="352" textAnchor="middle" className={styles.dimText}>
+        {t('about.plantLabel')}
+      </text>
     </svg>
   )
 }
 
 function About() {
+  const { t } = useLanguage()
+
   const certifications = [
-    { name: 'ISO 9001:2015', description: 'Quality Management System' },
-    { name: 'ISO 14001:2015', description: 'Environmental Management System' },
-    { name: 'BSCI', description: 'Business Social Compliance Initiative' },
+    { name: 'ISO 9001:2015', descKey: 'about.iso9001Desc' },
+    { name: 'ISO 14001:2015', descKey: 'about.iso14001Desc' },
+    { name: 'BSCI', descKey: 'about.bsciDesc' },
   ]
 
   const values = [
-    {
-      code: 'V-01',
-      title: 'Quality First',
-      text: 'Every product undergoes rigorous quality testing. Our in-house QA lab ensures consistency and reliability in every batch.',
-    },
-    {
-      code: 'V-02',
-      title: 'Customer Focus',
-      text: 'We understand the unique needs of the RMG industry and provide tailored solutions that meet specific requirements.',
-    },
-    {
-      code: 'V-03',
-      title: 'Sustainability',
-      text: 'Committed to environmentally responsible manufacturing practices and sustainable packaging solutions.',
-    },
+    { code: 'V-01', titleKey: 'about.v1Title', textKey: 'about.v1Text' },
+    { code: 'V-02', titleKey: 'about.v2Title', textKey: 'about.v2Text' },
+    { code: 'V-03', titleKey: 'about.v3Title', textKey: 'about.v3Text' },
   ]
 
   return (
@@ -67,12 +61,10 @@ function About() {
         <div className="container">
           <p className={styles.kicker}>
             <span className={styles.kickerRule} aria-hidden="true"></span>
-            ABOUT POLYCONNECT
+            {t('about.kicker').toUpperCase()}
           </p>
-          <h1 className={styles.heroTitle}>About PolyConnect</h1>
-          <p className={styles.heroSubtitle}>
-            Leading manufacturer of poly packaging materials and textile raw materials in Bangladesh since 2008.
-          </p>
+          <h1 className={styles.heroTitle}>{t('about.heroTitle')}</h1>
+          <p className={styles.heroSubtitle}>{t('about.heroSubtitle')}</p>
         </div>
       </section>
 
@@ -80,17 +72,9 @@ function About() {
       <section className={styles.section}>
         <div className={`container ${styles.storyGrid}`}>
           <div className={styles.storyContent}>
-            <h2 className={styles.sectionTitle}>Our Story</h2>
-            <p>
-              PolyConnect started as a small manufacturing unit in Dhaka, Bangladesh, with a vision to provide
-              high-quality poly packaging solutions to the Ready-Made Garment (RMG) industry. Over the years,
-              we have grown into one of the most trusted names in poly packaging and textile raw materials.
-            </p>
-            <p>
-              Our state-of-the-art manufacturing facility produces HDPE woven sacks, BOPP films, LDPE shrink
-              films, and PP yarn that meet international quality standards. We serve RMG exporters, garment
-              factories, and industrial clients across Bangladesh and beyond.
-            </p>
+            <h2 className={styles.sectionTitle}>{t('about.ourStory')}</h2>
+            <p>{t('about.story1')}</p>
+            <p>{t('about.story2')}</p>
           </div>
           <div className={styles.storyFigure}>
             <FacilityDrawing />
@@ -103,7 +87,7 @@ function About() {
         <div className="container">
           <header className={styles.sectionHeader}>
             <span className={styles.sectionIndex}>01</span>
-            <h2 className={styles.sectionTitle}>Certifications &amp; Compliance</h2>
+            <h2 className={styles.sectionTitle}>{t('about.certTitle')}</h2>
           </header>
           <div className={styles.certGrid}>
             {certifications.map((cert) => (
@@ -111,7 +95,7 @@ function About() {
                 <ShieldCheckIcon size={26} className={styles.certIcon} />
                 <div className={styles.certInfo}>
                   <h3 className={styles.certName}>{cert.name}</h3>
-                  <p className={styles.certDesc}>{cert.description}</p>
+                  <p className={styles.certDesc}>{t(cert.descKey)}</p>
                 </div>
               </div>
             ))}
@@ -124,14 +108,14 @@ function About() {
         <div className="container">
           <header className={styles.sectionHeader}>
             <span className={styles.sectionIndex}>02</span>
-            <h2 className={styles.sectionTitle}>Our Values</h2>
+            <h2 className={styles.sectionTitle}>{t('about.valuesTitle')}</h2>
           </header>
           <div className={styles.valuesGrid}>
             {values.map((value) => (
               <div key={value.code} className={styles.valueCard}>
                 <span className={styles.valueCode}>{value.code}</span>
-                <h3 className={styles.valueTitle}>{value.title}</h3>
-                <p className={styles.valueText}>{value.text}</p>
+                <h3 className={styles.valueTitle}>{t(value.titleKey)}</h3>
+                <p className={styles.valueText}>{t(value.textKey)}</p>
               </div>
             ))}
           </div>
@@ -143,12 +127,12 @@ function About() {
         <div className="container">
           <header className={styles.sectionHeader}>
             <span className={styles.sectionIndex}>03</span>
-            <h2 className={styles.sectionTitle}>Contact Us</h2>
+            <h2 className={styles.sectionTitle}>{t('about.contactTitle')}</h2>
           </header>
           <div className={styles.contactGrid}>
             <div className={styles.contactItem}>
               <h3 className={styles.contactLabel}>
-                <MapPinIcon size={16} /> Address
+                <MapPinIcon size={16} /> {t('about.address')}
               </h3>
               <p className={styles.contactValue}>
                 Polynagar Industrial Area<br />
@@ -157,7 +141,7 @@ function About() {
             </div>
             <div className={styles.contactItem}>
               <h3 className={styles.contactLabel}>
-                <PhoneIcon size={16} /> Phone
+                <PhoneIcon size={16} /> {t('about.phone')}
               </h3>
               <p className={styles.contactValue}>
                 <a href={CONTACT.phoneTel} className={styles.contactLink}>{CONTACT.phoneDisplay}</a>
@@ -165,7 +149,7 @@ function About() {
             </div>
             <div className={styles.contactItem}>
               <h3 className={styles.contactLabel}>
-                <WhatsAppIcon size={16} /> WhatsApp
+                <WhatsAppIcon size={16} /> {t('about.whatsapp')}
               </h3>
               <p className={styles.contactValue}>
                 <a
@@ -180,7 +164,7 @@ function About() {
             </div>
             <div className={styles.contactItem}>
               <h3 className={styles.contactLabel}>
-                <MailIcon size={16} /> Email
+                <MailIcon size={16} /> {t('about.email')}
               </h3>
               <p className={styles.contactValue}>
                 <a href={`mailto:${CONTACT.email}`} className={styles.contactLink}>{CONTACT.email}</a>
@@ -188,11 +172,11 @@ function About() {
             </div>
             <div className={styles.contactItem}>
               <h3 className={styles.contactLabel}>
-                <ClockIcon size={16} /> Business Hours
+                <ClockIcon size={16} /> {t('about.businessHours')}
               </h3>
               <p className={styles.contactValue}>
-                Sunday - Thursday: 9:00 AM - 6:00 PM<br />
-                Friday: Closed
+                {t('about.hours1')}<br />
+                {t('about.hours2')}
               </p>
             </div>
           </div>

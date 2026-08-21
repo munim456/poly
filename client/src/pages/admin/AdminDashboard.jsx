@@ -74,6 +74,10 @@ function AdminDashboard() {
               <span className={styles.actionIcon}><BagIcon size={24} /></span>
               <span className={styles.actionTitle}>{t('buyerMgmt.title')}</span>
             </Link>
+            <Link to="/admin/analytics" className={styles.actionCard}>
+              <span className={styles.actionIcon}><CheckCircleIcon size={24} /></span>
+              <span className={styles.actionTitle}>{t('analytics.title')}</span>
+            </Link>
           </div>
         </div>
       </div>

@@ -70,9 +70,9 @@ function QualityDashboard() {
           tensile_strength: '',
         },
       })
-      alert('Quality batch submitted for approval')
+      alert(t('qd.submittedMsg'))
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to submit quality batch')
+      setError(err.response?.data?.error || t('qd.failedMsg'))
     } finally {
       setSubmitting(false)
     }
@@ -86,12 +86,12 @@ function QualityDashboard() {
         {error && <div className={styles.error}>{error}</div>}
 
         <div className={styles.formCard}>
-          <h2 className={styles.formTitle}>Log New Quality Batch</h2>
+          <h2 className={styles.formTitle}>{t('qd.logBatch')}</h2>
           
           <form onSubmit={handleSubmit} className={styles.form}>
             {/* Product Selection */}
             <div className={styles.field}>
-              <label className={styles.label}>Product *</label>
+              <label className={styles.label}>{t('form.product')}</label>
               <select
                 name="product_id"
                 value={formData.product_id}
@@ -99,7 +99,7 @@ function QualityDashboard() {
                 className={styles.select}
                 required
               >
-                <option value="">Select a product</option>
+                <option value="">{t('form.selectProduct')}</option>
                 {products.map(product => (
                   <option key={product.id} value={product.id}>
                     {product.name}
@@ -110,7 +110,7 @@ function QualityDashboard() {
 
             {/* Batch Date */}
             <div className={styles.field}>
-              <label className={styles.label}>Batch Date *</label>
+              <label className={styles.label}>{t('qd.batchDate')}</label>
               <input
                 type="date"
                 name="batch_date"
@@ -123,10 +123,10 @@ function QualityDashboard() {
 
             {/* Measured Values */}
             <div className={styles.field}>
-              <label className={styles.label}>Measured Values *</label>
+              <label className={styles.label}>{t('qd.measuredValues')}</label>
               <div className={styles.specsGrid}>
                 <div className={styles.specField}>
-                  <label>GSM</label>
+                  <label>{t('qd.gsm')}</label>
                   <input
                     type="text"
                     value={formData.measured_values.gsm}
@@ -135,7 +135,7 @@ function QualityDashboard() {
                   />
                 </div>
                 <div className={styles.specField}>
-                  <label>Thickness (micron)</label>
+                  <label>{t('qd.thickness')}</label>
                   <input
                     type="text"
                     value={formData.measured_values.thickness}
@@ -144,7 +144,7 @@ function QualityDashboard() {
                   />
                 </div>
                 <div className={styles.specField}>
-                  <label>Tensile Strength (MPa)</label>
+                  <label>{t('qd.tensile')}</label>
                   <input
                     type="text"
                     value={formData.measured_values.tensile_strength}
@@ -157,13 +157,13 @@ function QualityDashboard() {
 
             {/* Certification File */}
             <div className={styles.field}>
-              <label className={styles.label}>Certification File (optional)</label>
+              <label className={styles.label}>{t('qd.certFile')}</label>
               <input
                 type="file"
                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                 className={styles.fileInput}
               />
-              <span className={styles.hint}>Upload test report or certification document</span>
+              <span className={styles.hint}>{t('qd.uploadHint')}</span>
             </div>
 
             {/* Submit */}
@@ -173,18 +173,18 @@ function QualityDashboard() {
                 className={styles.submitBtn}
                 disabled={submitting}
               >
-                {submitting ? t('common.loading') : 'Submit for Approval'}
+                {submitting ? t('common.loading') : t('qd.submitForApproval')}
               </button>
             </div>
           </form>
         </div>
 
         <div className={styles.infoCard}>
-          <h3>How it works</h3>
+          <h3>{t('qd.howItWorks')}</h3>
           <ol>
-            <li>Enter the batch details and measured values</li>
-            <li>Submit for admin approval</li>
-            <li>Once approved, data becomes visible on the product page</li>
+            <li>{t('qd.step1')}</li>
+            <li>{t('qd.step2')}</li>
+            <li>{t('qd.step3')}</li>
           </ol>
         </div>
       </div>

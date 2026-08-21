@@ -77,7 +77,7 @@ function ProductManagement() {
   }
 
   const handleDelete = async (id) => {
-    if (confirm('Are you sure you want to deactivate this product?')) {
+    if (confirm(t('pm.deactivateConfirm'))) {
       try {
         await api.delete(`/products/${id}`)
         fetchProducts()
@@ -109,7 +109,7 @@ function ProductManagement() {
             onClick={() => { setShowForm(true); setEditingProduct(null); resetForm(); }}
             className={styles.addBtn}
           >
-            + Add Product
+            {t('pm.addProduct')}
           </button>
         </div>
 
@@ -118,13 +118,13 @@ function ProductManagement() {
           <div className={styles.modal}>
             <div className={styles.modalContent}>
               <div className={styles.modalHeader}>
-                <h3>{editingProduct ? 'Edit Product' : 'Add New Product'}</h3>
+                <h3>{editingProduct ? t('pm.editProduct') : t('pm.addNewProduct')}</h3>
                 <button onClick={() => setShowForm(false)} className={styles.closeBtn}>×</button>
               </div>
               <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.formGrid}>
                   <div className={styles.field}>
-                    <label>Name *</label>
+                    <label>{t('pm.name')}</label>
                     <input
                       type="text"
                       name="name"
@@ -134,21 +134,21 @@ function ProductManagement() {
                     />
                   </div>
                   <div className={styles.field}>
-                    <label>Category *</label>
+                    <label>{t('pm.category')}</label>
                     <select
                       name="category"
                       value={formData.category}
                       onChange={handleChange}
                       required
                     >
-                      <option value="hdpe_bags">HDPE Woven Sacks</option>
-                      <option value="bopp_film">BOPP Film</option>
-                      <option value="yarn">PP Yarn</option>
-                      <option value="ldpe_film">LDPE Shrink Film</option>
+                      <option value="hdpe_bags">{t('home.categories.hdpe_bags')}</option>
+                      <option value="bopp_film">{t('home.categories.bopp_film')}</option>
+                      <option value="yarn">{t('home.categories.yarn')}</option>
+                      <option value="ldpe_film">{t('home.categories.ldpe_film')}</option>
                     </select>
                   </div>
                   <div className={styles.fieldFull}>
-                    <label>Description</label>
+                    <label>{t('pm.description')}</label>
                     <textarea
                       name="description"
                       value={formData.description}
@@ -157,7 +157,7 @@ function ProductManagement() {
                     />
                   </div>
                   <div className={styles.field}>
-                    <label>Regular Price (৳/kg) *</label>
+                    <label>{t('pm.regularPrice')}</label>
                     <input
                       type="number"
                       name="regular_price"
@@ -168,7 +168,7 @@ function ProductManagement() {
                     />
                   </div>
                   <div className={styles.field}>
-                    <label>Regular MOQ (kg) *</label>
+                    <label>{t('pm.regularMoq')}</label>
                     <input
                       type="number"
                       name="regular_moq"
@@ -178,7 +178,7 @@ function ProductManagement() {
                     />
                   </div>
                   <div className={styles.field}>
-                    <label>Wholesale MOQ (kg)</label>
+                    <label>{t('pm.wholesaleMoq')}</label>
                     <input
                       type="number"
                       name="wholesale_moq"
@@ -194,16 +194,16 @@ function ProductManagement() {
                         checked={formData.is_bargaining_allowed}
                         onChange={handleChange}
                       />
-                      Allow Price Negotiation
+                      {t('pm.allowNegotiation')}
                     </label>
                   </div>
                 </div>
                 <div className={styles.formActions}>
                   <button type="button" onClick={() => setShowForm(false)} className={styles.cancelBtn}>
-                    Cancel
+                    {t('common.cancel')}
                   </button>
                   <button type="submit" className={styles.submitBtn}>
-                    {editingProduct ? 'Update' : 'Create'}
+                    {editingProduct ? t('pm.update') : t('pm.create')}
                   </button>
                 </div>
               </form>
@@ -219,33 +219,33 @@ function ProductManagement() {
             <table className={styles.table}>
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>MOQ</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th>{t('pm.colName')}</th>
+                  <th>{t('pm.colCategory')}</th>
+                  <th>{t('pm.colPrice')}</th>
+                  <th>{t('pm.colMoq')}</th>
+                  <th>{t('pm.colStatus')}</th>
+                  <th>{t('pm.colActions')}</th>
                 </tr>
               </thead>
               <tbody>
                 {products.map(product => (
                   <tr key={product.id}>
                     <td className={styles.nameCell}>{product.name}</td>
-                    <td>{product.category.replace('_', ' ')}</td>
+                    <td>{t(`home.categories.${product.category}`)}</td>
                     <td className={styles.priceCell}>৳{product.regular_price}/kg</td>
                     <td>{product.regular_moq} kg</td>
                     <td>
                       <span className={`${styles.statusBadge} ${product.is_active ? styles.active : styles.inactive}`}>
-                        {product.is_active ? 'Active' : 'Inactive'}
+                        {product.is_active ? t('pm.active') : t('pm.inactive')}
                       </span>
                     </td>
                     <td>
                       <div className={styles.actions}>
                         <button onClick={() => handleEdit(product)} className={styles.editBtn}>
-                          Edit
+                          {t('common.edit')}
                         </button>
                         <button onClick={() => handleDelete(product.id)} className={styles.deleteBtn}>
-                          Deactivate
+                          {t('pm.deactivate')}
                         </button>
                       </div>
                     </td>
