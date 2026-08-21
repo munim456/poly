@@ -38,9 +38,14 @@ function BuyerDashboard() {
       <div className="container">
         <div className={styles.header}>
           <h1 className={styles.title}>{t('dashboard.welcome')}, {user?.company_name}</h1>
-          <Link to="/buyer/rfq" className={styles.newOrderBtn}>
-            + {t('order.title')}
-          </Link>
+          <div className={styles.headerActions}>
+            <Link to="/buyer/profile" className={styles.profileBtn}>
+              Company Profile
+            </Link>
+            <Link to="/buyer/rfq" className={styles.newOrderBtn}>
+              + {t('order.title')}
+            </Link>
+          </div>
         </div>
 
         {/* Stats */}

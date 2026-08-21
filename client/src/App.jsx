@@ -20,6 +20,7 @@ import Register from './pages/auth/Register'
 import BuyerDashboard from './pages/buyer/BuyerDashboard'
 import OrderHistory from './pages/buyer/OrderHistory'
 import RFQForm from './pages/buyer/RFQForm'
+import BuyerProfile from './pages/buyer/BuyerProfile'
 
 // Staff pages
 import SalesDashboard from './pages/staff/SalesDashboard'
@@ -29,9 +30,12 @@ import QualityDashboard from './pages/staff/QualityDashboard'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import ProductManagement from './pages/admin/ProductManagement'
 import QualityApproval from './pages/admin/QualityApproval'
+import StaffManagement from './pages/admin/StaffManagement'
+import BuyerManagement from './pages/admin/BuyerManagement'
 
 // Protected route wrapper
 import ProtectedRoute from './components/common/ProtectedRoute'
+import WhatsAppFloat from './components/common/WhatsAppFloat'
 
 function App() {
   return (
@@ -74,6 +78,14 @@ function App() {
                   element={
                     <ProtectedRoute roles={['buyer']}>
                       <RFQForm />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/buyer/profile"
+                  element={
+                    <ProtectedRoute roles={['buyer']}>
+                      <BuyerProfile />
                     </ProtectedRoute>
                   }
                 />
@@ -123,9 +135,26 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
+                <Route
+                  path="/admin/staff"
+                  element={
+                    <ProtectedRoute roles={['owner']}>
+                      <StaffManagement />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/admin/buyers"
+                  element={
+                    <ProtectedRoute roles={['owner']}>
+                      <BuyerManagement />
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
             </main>
             <Footer />
+            <WhatsAppFloat />
           </div>
         </Router>
       </LanguageProvider>

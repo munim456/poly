@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="'IBM Plex Mono',monospace">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#EAF2FB" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="shrink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F5F9FD"/>
+      <stop offset="0.55" stop-color="#DCEAF7"/>
+      <stop offset="1" stop-color="#C9DCF0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="#FAFBFC"/>
+  <rect width="800" height="600" fill="url(#grid)"/>
+  <rect x="24" y="24" width="752" height="552" fill="none" stroke="#0B1F3A" stroke-width="2"/>
+  <rect x="32" y="32" width="736" height="536" fill="none" stroke="#0B1F3A" stroke-width="0.75"/>
+
+  <!-- Shrink-wrapped bale -->
+  <g transform="translate(210,120)">
+    <!-- wrapped load -->
+    <path d="M40 90 L300 90 L340 130 L80 130 Z" fill="#DCEAF7" stroke="#0B1F3A" stroke-width="2.5"/>
+    <rect x="40" y="130" width="260" height="220" fill="url(#shrink)" stroke="#0B1F3A" stroke-width="2.5"/>
+    <path d="M300 90 L340 130 L340 350 L300 350 L300 90" fill="#EAF2FB" stroke="#0B1F3A" stroke-width="2.5"/>
+    <!-- gloss highlights -->
+    <path d="M70 150 C110 190, 100 300, 76 330" stroke="#FFFFFF" stroke-width="10" opacity="0.7" fill="none"/>
+    <path d="M120 140 C150 200, 145 290, 128 336" stroke="#FFFFFF" stroke-width="5" opacity="0.6" fill="none"/>
+    <!-- shrink seams -->
+    <path d="M40 200h260M40 280h260" stroke="#9CC6F5" stroke-width="1.5"/>
+    <path d="M170 130v220" stroke="#9CC6F5" stroke-width="1.25"/>
+  </g>
+
+  <!-- Heat arrows -->
+  <g stroke="#1E4E79" stroke-width="2" fill="#1E4E79">
+    <path d="M560 180 l60 -24 m-14 2 l14 -2 l-4 13 z" fill="none"/>
+    <path d="M548 250 l66 -8 m-14 -1 l14 1 l-8 11 z" fill="none"/>
+    <text x="568" y="152" font-size="13" stroke="none">HEAT 130–160°C</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(56,452)">
+    <rect x="0" y="0" width="208" height="102" fill="#FFFFFF" stroke="#0B1F3A" stroke-width="1.5"/>
+    <line x1="0" y1="36" x2="208" y2="36" stroke="#0B1F3A" stroke-width="1"/>
+    <line x1="0" y1="70" x2="208" y2="70" stroke="#0B1F3A" stroke-width="1"/>
+    <text x="12" y="24" fill="#0B1F3A" font-size="15" letter-spacing="2">POLYCONNECT</text>
+    <text x="12" y="58" fill="#55636F" font-size="12">ITEM: LDPE SHRINK · D1</text>
+    <text x="12" y="92" fill="#55636F" font-size="12">VIEW: WRAPPED LOAD</text>
+  </g>
+  <path d="M740 44l16 16M740 60l16 -16" stroke="#0B1F3A" stroke-width="1.5"/>
+</svg>

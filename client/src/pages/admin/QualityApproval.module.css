@@ -1,15 +1,18 @@
 .page {
-  padding: var(--space-8) 0;
-  min-height: calc(100vh - 64px);
+  padding: var(--space-8) 0 var(--space-16);
+  min-height: calc(100vh - 102px);
   background-color: var(--paper-white);
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--ink-navy);
-  margin: 0 0 var(--space-8) 0;
+  margin: 0 0 var(--space-6) 0;
+  padding-bottom: var(--space-5);
+  border-bottom: 2px solid var(--ink-navy);
 }
 
 .loading,
@@ -20,27 +23,31 @@
   padding: var(--space-12);
   color: var(--slate-gray);
   font-size: var(--text-lg);
-  background-color: white;
-  border-radius: var(--radius-lg);
+  background-color: #ffffff;
+  border: 1px dashed var(--line-strong);
 }
 
 .batchesList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
 }
 
 .batchCard {
-  background-color: white;
-  border-radius: var(--radius-lg);
+  background-color: #ffffff;
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--status-warning);
   padding: var(--space-6);
-  box-shadow: var(--shadow-sm);
 }
 
 .batchHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--line);
   margin-bottom: var(--space-4);
 }
 
@@ -53,18 +60,24 @@
 }
 
 .batchInfo {
-  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
   color: var(--slate-gray);
   margin: 0;
 }
 
 .pendingBadge {
-  font-size: var(--text-xs);
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px var(--space-2);
+  border: 1px solid currentColor;
   font-weight: 500;
-  background-color: #fef3c7;
-  color: #d97706;
+  background-color: var(--status-warning-bg);
+  color: var(--status-warning);
+  white-space: nowrap;
 }
 
 .specsGrid {
@@ -77,16 +90,18 @@
 .specItem {
   display: flex;
   flex-direction: column;
-  padding: var(--space-3);
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
   background-color: var(--frost-white);
-  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
 }
 
 .specLabel {
-  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--slate-gray);
-  text-transform: capitalize;
-  margin-bottom: var(--space-1);
 }
 
 .specValue {
@@ -96,48 +111,58 @@
 }
 
 .certLink {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   margin-bottom: var(--space-4);
-  color: var(--poly-sheen);
+  color: var(--link);
   text-decoration: none;
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
+  font-weight: 500;
 }
 
 .certLink:hover {
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .actions {
   display: flex;
   gap: var(--space-3);
   padding-top: var(--space-4);
-  border-top: 1px solid var(--frost-white);
+  border-top: 1px solid var(--line);
 }
 
 .approveBtn,
 .rejectBtn {
-  padding: var(--space-2) var(--space-6);
-  border: none;
-  border-radius: var(--radius-md);
+  min-height: 44px;
+  padding: 0 var(--space-6);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sharp);
   font-weight: 600;
+  font-size: var(--text-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: background-color var(--transition-fast);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .approveBtn {
-  background-color: #10b981;
+  background-color: var(--status-success);
   color: white;
 }
 
 .approveBtn:hover {
-  background-color: #059669;
+  background-color: #116532;
 }
 
 .rejectBtn {
-  background-color: #fee2e2;
-  color: #dc2626;
+  background-color: transparent;
+  color: var(--status-danger);
+  border-color: currentColor;
 }
 
 .rejectBtn:hover {
-  background-color: #fecaca;
+  background-color: var(--status-danger-bg);
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../../context/LanguageContext'
 import api from '../../services/api'
+import { BagIcon, CheckCircleIcon, ShieldCheckIcon } from '../../components/common/Icons'
 import styles from './AdminDashboard.module.css'
 
 function AdminDashboard() {
@@ -58,16 +59,20 @@ function AdminDashboard() {
           <h2 className={styles.sectionTitle}>Quick Actions</h2>
           <div className={styles.actionsGrid}>
             <Link to="/admin/products" className={styles.actionCard}>
-              <span className={styles.actionIcon}>📦</span>
+              <span className={styles.actionIcon}><BagIcon size={24} /></span>
               <span className={styles.actionTitle}>Manage Products</span>
             </Link>
             <Link to="/admin/quality" className={styles.actionCard}>
-              <span className={styles.actionIcon}>✓</span>
+              <span className={styles.actionIcon}><CheckCircleIcon size={24} /></span>
               <span className={styles.actionTitle}>Approve Quality Data</span>
             </Link>
             <Link to="/admin/staff" className={styles.actionCard}>
-              <span className={styles.actionIcon}>👥</span>
+              <span className={styles.actionIcon}><ShieldCheckIcon size={24} /></span>
               <span className={styles.actionTitle}>Manage Staff</span>
+            </Link>
+            <Link to="/admin/buyers" className={styles.actionCard}>
+              <span className={styles.actionIcon}><BagIcon size={24} /></span>
+              <span className={styles.actionTitle}>Manage Buyers</span>
             </Link>
           </div>
         </div>
