@@ -3,7 +3,22 @@ import { useParams, Link } from 'react-router-dom'
 import { useLanguage } from '../../context/LanguageContext'
 import { useAuth } from '../../context/AuthContext'
 import api from '../../services/api'
+import {
+  BagIcon,
+  FilmRollIcon,
+  YarnIcon,
+  LayersIcon,
+  CheckCircleIcon,
+  ArrowRightIcon,
+} from '../../components/common/Icons'
 import styles from './ProductDetail.module.css'
+
+const CATEGORY_ICONS = {
+  hdpe_bags: BagIcon,
+  bopp_film: FilmRollIcon,
+  yarn: YarnIcon,
+  ldpe_film: LayersIcon,
+}
 
 function ProductDetail() {
   const { id } = useParams()
@@ -37,7 +52,7 @@ function ProductDetail() {
 
   const formatSpecs = (specs) => {
     if (!specs || Object.keys(specs).length === 0) return null
-    
+
     return Object.entries(specs).map(([key, value]) => ({
       label: key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
       value: typeof value === 'boolean' ? (value ? 'Yes' : 'No') : value,
@@ -46,12 +61,14 @@ function ProductDetail() {
 
   const specs = formatSpecs(product.base_specs)
   const tiers = product.wholesale_price_tiers || []
+  const PlaceholderIcon = CATEGORY_ICONS[product.category] || BagIcon
 
   return (
     <div className={styles.detail}>
       <div className="container">
         <Link to="/products" className={styles.backLink}>
-          ← {t('common.back')} {t('nav.products')}
+          <ArrowRightIcon size={14} className={styles.backIcon} />
+          {t('common.back')} {t('nav.products')}
         </Link>
 
         <div className={styles.layout}>
@@ -61,7 +78,7 @@ function ProductDetail() {
               {product.images && product.images[0] ? (
                 <img src={product.images[0]} alt={product.name} />
               ) : (
-                <div className={styles.placeholderImage}>📦</div>
+                <PlaceholderIcon size={96} className={styles.placeholderImage} />
               )}
             </div>
             {product.images && product.images.length > 1 && (
@@ -77,14 +94,14 @@ function ProductDetail() {
 
           {/* Info Section */}
           <div className={styles.infoSection}>
+            <p className={styles.category}>{product.category.replace('_', ' ')}</p>
             <h1 className={styles.title}>{product.name}</h1>
-            <p className={styles.category}>{product.category.replace('_', ' ').toUpperCase()}</p>
-            
+
             {product.description && (
               <p className={styles.description}>{product.description}</p>
             )}
 
-            {/* Specs Table (Monospace) */}
+            {/* Specs Table (Monospace datasheet) */}
             {specs && specs.length > 0 && (
               <div className={styles.specsSection}>
                 <h2 className={styles.sectionTitle}>{t('product.specifications')}</h2>
@@ -93,6 +110,7 @@ function ProductDetail() {
                     {specs.map(spec => (
                       <tr key={spec.label}>
                         <td className={styles.specLabel}>{spec.label}</td>
+                        <td className={styles.specLeader} aria-hidden="true"></td>
                         <td className={styles.specValue}>{spec.value}</td>
                       </tr>
                     ))}
@@ -104,9 +122,8 @@ function ProductDetail() {
             {/* Pricing */}
             <div className={styles.pricingSection}>
               <h2 className={styles.sectionTitle}>{t('product.pricing')}</h2>
-              
+
               <div className={styles.pricingGrid}>
-                {/* Regular Pricing */}
                 <div className={styles.pricingCard}>
                   <h3 className={styles.pricingTitle}>{t('product.regular')}</h3>
                   <div className={styles.priceMain}>
@@ -117,7 +134,6 @@ function ProductDetail() {
                   <p className={styles.moq}>{t('product.moq')}: {product.regular_moq} kg</p>
                 </div>
 
-                {/* Wholesale Pricing */}
                 {tiers.length > 0 && (
                   <div className={`${styles.pricingCard} ${styles.pricingCardHighlighted}`}>
                     <h3 className={styles.pricingTitle}>{t('product.wholesale')}</h3>
@@ -135,8 +151,8 @@ function ProductDetail() {
               </div>
 
               <p className={styles.bargainingInfo}>
-                {product.is_bargaining_allowed 
-                  ? t('product.bargaining') 
+                {product.is_bargaining_allowed
+                  ? t('product.bargaining')
                   : t('product.noBargaining')}
               </p>
             </div>
@@ -148,9 +164,12 @@ function ProductDetail() {
                 <div className={styles.qualityCard}>
                   <div className={styles.qualityHeader}>
                     <span className={styles.batchDate}>
-                      Batch: {new Date(product.quality_batch.batch_date).toLocaleDateString()}
+                      BATCH {new Date(product.quality_batch.batch_date).toLocaleDateString()}
                     </span>
-                    <span className={styles.qualityBadge}>✓ Verified</span>
+                    <span className={styles.qualityBadge}>
+                      <CheckCircleIcon size={15} />
+                      VERIFIED
+                    </span>
                   </div>
                   <div className={styles.qualitySpecs}>
                     {Object.entries(product.quality_batch.measured_values).map(([key, value]) => (
@@ -167,12 +186,14 @@ function ProductDetail() {
             {/* CTA */}
             <div className={styles.ctaSection}>
               {user ? (
-                <Link to={`/buyer/rfq?product=${product.id}`} className={styles.btnPrimary}>
+                <Link to={`/buyer/rfq?product=${product.id}`} className="btn btnPrimary">
                   {t('product.placeOrder')}
+                  <ArrowRightIcon size={16} />
                 </Link>
               ) : (
-                <Link to="/register" className={styles.btnPrimary}>
+                <Link to="/register" className="btn btnPrimary">
                   {t('product.requestQuote')}
+                  <ArrowRightIcon size={16} />
                 </Link>
               )}
             </div>

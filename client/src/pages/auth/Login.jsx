@@ -53,9 +53,10 @@ function Login() {
         
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.field}>
-            <label className={styles.label}>{t('auth.login.email')}</label>
+            <label className={styles.label} htmlFor="login-email">{t('auth.login.email')}</label>
             <input
               type="email"
+              id="login-email"
               name="email"
               value={formData.email}
               onChange={handleChange}
@@ -65,9 +66,10 @@ function Login() {
           </div>
           
           <div className={styles.field}>
-            <label className={styles.label}>{t('auth.login.password')}</label>
+            <label className={styles.label} htmlFor="login-password">{t('auth.login.password')}</label>
             <input
               type="password"
+              id="login-password"
               name="password"
               value={formData.password}
               onChange={handleChange}

@@ -89,8 +89,78 @@ h6 {
 
 /* Focus styles for accessibility */
 :focus-visible {
-  outline: 2px solid var(--poly-sheen);
+  outline: var(--focus-ring);
   outline-offset: 2px;
+}
+
+/* Shared button system — compose with CSS Modules via global class names */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px; /* touch target */
+  padding: 0 var(--space-5);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sharp);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btnPrimary {
+  background-color: var(--ink-navy);
+  color: #ffffff;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background-color: var(--resin-blue);
+}
+
+.btnSecondary {
+  background-color: transparent;
+  color: inherit;
+  border-color: currentColor;
+}
+
+.btnSecondary:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.btnGhost {
+  background-color: transparent;
+  color: var(--link);
+}
+
+.btnGhost:hover:not(:disabled) {
+  color: var(--link-hover);
+}
+
+/* Reduced motion — disable decorative animation/transitions */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Selection */

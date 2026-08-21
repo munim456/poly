@@ -1,4 +1,4 @@
-{
+﻿{
   "nav": {
     "home": "Home",
     "products": "Products",
@@ -10,13 +10,21 @@
   },
   "home": {
     "hero": {
+      "badge": "Direct from the manufacturer",
       "title": "Industrial Poly Packaging Solutions",
       "subtitle": "Manufacturing high-quality HDPE, LDPE, BOPP products and PP yarn for Bangladesh's RMG and industrial sectors",
       "cta": "View Products",
       "ctaSecondary": "Request Quote"
     },
+    "proof": {
+      "years": "Years manufacturing",
+      "capacity": "Tonnes annual capacity",
+      "buyers": "B2B buyers served",
+      "ontime": "On-time dispatch rate"
+    },
     "categories": {
       "title": "Product Categories",
+      "subtitle": "Four production lines, one quality standard â€” every batch lab-tested before dispatch.",
       "hdpe_bags": "HDPE Woven Sacks",
       "bopp_film": "BOPP Film",
       "yarn": "PP Yarn",
@@ -27,6 +35,11 @@
       "certified": "ISO Certified",
       "experience": "15+ Years Experience",
       "quality": "Quality Assured"
+    },
+    "ctaBand": {
+      "title": "Need a custom spec or bulk pricing?",
+      "text": "Send your requirements â€” GSM, width, capacity â€” and our sales team responds with a formal quote within one business day.",
+      "button": "Request a Quote"
     }
   },
   "products": {
@@ -143,8 +156,8 @@
     "quickLinks": "Quick Links",
     "contact": "Contact Us",
     "address": "Dhaka, Bangladesh",
-    "phone": "+880 1XXXXXXXXX",
-    "email": "info@polyconnect.com",
-    "copyright": "© 2024 PolyConnect. All rights reserved."
+    "phone": "+880 1712-980725",
+    "email": "muhtasimhaque2@gmail.com",
+    "copyright": "Â© 2024 PolyConnect. All rights reserved."
   }
 }

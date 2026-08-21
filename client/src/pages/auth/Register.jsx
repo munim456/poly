@@ -48,9 +48,10 @@ function Register() {
         
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.field}>
-            <label className={styles.label}>{t('auth.register.companyName')}</label>
+            <label className={styles.label} htmlFor="reg-company">{t('auth.register.companyName')}</label>
             <input
               type="text"
+              id="reg-company"
               name="company_name"
               value={formData.company_name}
               onChange={handleChange}
@@ -60,9 +61,10 @@ function Register() {
           </div>
           
           <div className={styles.field}>
-            <label className={styles.label}>{t('auth.register.contactPerson')}</label>
+            <label className={styles.label} htmlFor="reg-contact">{t('auth.register.contactPerson')}</label>
             <input
               type="text"
+              id="reg-contact"
               name="contact_person"
               value={formData.contact_person}
               onChange={handleChange}
@@ -73,9 +75,10 @@ function Register() {
           
           <div className={styles.fieldRow}>
             <div className={styles.field}>
-              <label className={styles.label}>{t('auth.register.phone')}</label>
+              <label className={styles.label} htmlFor="reg-phone">{t('auth.register.phone')}</label>
               <input
                 type="tel"
+                id="reg-phone"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
@@ -85,9 +88,10 @@ function Register() {
             </div>
             
             <div className={styles.field}>
-              <label className={styles.label}>{t('auth.register.email')}</label>
+              <label className={styles.label} htmlFor="reg-email">{t('auth.register.email')}</label>
               <input
                 type="email"
+                id="reg-email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -98,9 +102,10 @@ function Register() {
           </div>
           
           <div className={styles.field}>
-            <label className={styles.label}>{t('auth.register.password')}</label>
+            <label className={styles.label} htmlFor="reg-password">{t('auth.register.password')}</label>
             <input
               type="password"
+              id="reg-password"
               name="password"
               value={formData.password}
               onChange={handleChange}
@@ -112,9 +117,10 @@ function Register() {
           
           <div className={styles.fieldRow}>
             <div className={styles.field}>
-              <label className={styles.label}>{t('auth.register.address')}</label>
+              <label className={styles.label} htmlFor="reg-address">{t('auth.register.address')}</label>
               <input
                 type="text"
+                id="reg-address"
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
@@ -123,9 +129,10 @@ function Register() {
             </div>
             
             <div className={styles.field}>
-              <label className={styles.label}>{t('auth.register.city')}</label>
+              <label className={styles.label} htmlFor="reg-city">{t('auth.register.city')}</label>
               <input
                 type="text"
+                id="reg-city"
                 name="city"
                 value={formData.city}
                 onChange={handleChange}

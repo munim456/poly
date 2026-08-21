@@ -45,11 +45,35 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
+  /* Semantic actions — resin-blue passes 4.5:1 with white text; poly-sheen is accent/large-text only */
+  --action-primary: var(--resin-blue);
+  --action-primary-hover: #16406a;
+  --action-accent: var(--poly-sheen);
+  --link: var(--resin-blue);
+  --link-hover: var(--poly-sheen);
+
+  /* Status colors (AA on frost-white / paper-white) */
+  --status-success: #15803d;
+  --status-success-bg: #e8f5ee;
+  --status-warning: #b45309;
+  --status-warning-bg: #fdf3e7;
+  --status-danger: #b91c1c;
+  --status-danger-bg: #fdecec;
+  --status-info: var(--resin-blue);
+  --status-info-bg: var(--frost-white);
+
   /* Border radius */
+  --radius-sharp: 2px;
   --radius-sm: 0.25rem;
   --radius-md: 0.375rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  /* Hairline rules (Swiss grid) */
+  --line: rgba(11, 31, 58, 0.14);
+  --line-strong: rgba(11, 31, 58, 0.35);
+  --line-invert: rgba(234, 242, 251, 0.16);
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -60,6 +84,10 @@
   --transition-fast: 150ms ease;
   --transition-base: 200ms ease;
   --transition-slow: 300ms ease;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Focus ring */
+  --focus-ring: 2px solid var(--poly-sheen);
 
   /* Container widths */
   --container-sm: 640px;
