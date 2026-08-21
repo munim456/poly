@@ -3,6 +3,7 @@ import { body, validationResult } from 'express-validator'
 import db from '../config/database.js'
 import { authenticateToken, requireRole } from '../middleware/auth.js'
 import { upload } from '../middleware/upload.js'
+import { parseMaybeJson } from '../utils/parse.js'
 
 const router = express.Router()
 
@@ -27,7 +28,7 @@ router.get('/product/:productId', async (req, res) => {
 
     const parsedBatches = batches.map(b => ({
       ...b,
-      measured_values: JSON.parse(b.measured_values || '{}'),
+      measured_values: parseMaybeJson(b.measured_values, {}),
     }))
 
     res.json({ batches: parsedBatches })
@@ -53,7 +54,7 @@ router.get('/pending', authenticateToken, requireRole('owner'), async (req, res)
 
     const parsedBatches = batches.map(b => ({
       ...b,
-      measured_values: JSON.parse(b.measured_values || '{}'),
+      measured_values: parseMaybeJson(b.measured_values, {}),
     }))
 
     res.json({ batches: parsedBatches })

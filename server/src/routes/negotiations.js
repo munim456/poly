@@ -2,6 +2,7 @@ import express from 'express'
 import { body, validationResult } from 'express-validator'
 import db from '../config/database.js'
 import { authenticateToken, requireRole } from '../middleware/auth.js'
+import { sendNegotiationMessageNotification } from '../utils/mailer.js'
 
 const router = express.Router()
 
@@ -102,7 +103,24 @@ router.post('/:orderId/messages', authenticateToken, [
         updated_at: new Date() 
       })
 
-    // TODO: Send notification to other party
+    // Notify the other party (non-blocking): buyer offers → staff; staff counters → buyer
+    const product = await db('products').where({ id: order.product_id }).first()
+    const buyerAccount = await db('buyer_accounts').where({ id: order.buyer_id }).first()
+    let recipientEmail = process.env.ADMIN_NOTIFY_EMAIL
+    let senderLabel = `${buyerAccount?.company_name || 'Buyer'} (Buyer)`
+    if (req.user.role !== 'buyer') {
+      recipientEmail = buyerAccount?.email
+      senderLabel = 'PolyConnect Sales Team'
+    }
+    if (product && recipientEmail) {
+      sendNegotiationMessageNotification({
+        order,
+        product,
+        message,
+        senderLabel,
+        recipientEmail,
+      }).catch((err) => console.error('Negotiation notification failed:', err.message))
+    }
 
     res.status(201).json({ message })
   } catch (error) {

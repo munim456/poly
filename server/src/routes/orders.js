@@ -2,6 +2,8 @@ import express from 'express'
 import { body, validationResult } from 'express-validator'
 import db from '../config/database.js'
 import { authenticateToken, requireRole } from '../middleware/auth.js'
+import { sendAdminNewOrderNotification, sendBuyerStatusNotification } from '../utils/mailer.js'
+import { parseMaybeJson } from '../utils/parse.js'
 
 const router = express.Router()
 
@@ -72,7 +74,7 @@ router.get('/:id', authenticateToken, async (req, res) => {
     res.json({
       order: {
         ...order,
-        product_images: JSON.parse(order.product_images || '[]'),
+        product_images: parseMaybeJson(order.product_images, []),
       },
       negotiation: thread ? { ...thread, messages } : null,
     })
@@ -133,7 +135,13 @@ router.post('/', authenticateToken, requireRole('buyer'), [
       })
     }
 
-    // TODO: Send email notification to admin
+    // Email notification to admin (non-blocking — never fails the order)
+    const buyer = await db('buyer_accounts').where({ id: req.user.id }).first()
+    if (buyer) {
+      sendAdminNewOrderNotification({ order, buyer, product }).catch((err) =>
+        console.error('Admin notification failed:', err.message)
+      )
+    }
 
     res.status(201).json({ order })
   } catch (error) {
@@ -164,7 +172,14 @@ router.put('/:id/status', authenticateToken, requireRole('sales', 'owner'), [
       return res.status(404).json({ error: 'Order not found' })
     }
 
-    // TODO: Send notification to buyer about status change
+    // Email buyer about status change (non-blocking)
+    const product = await db('products').where({ id: order.product_id }).first()
+    const buyer = await db('buyer_accounts').where({ id: order.buyer_id }).first()
+    if (product && buyer) {
+      sendBuyerStatusNotification({ order, buyer, product }).catch((err) =>
+        console.error('Buyer status notification failed:', err.message)
+      )
+    }
 
     res.json({ order })
   } catch (error) {

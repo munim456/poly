@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs'
+﻿import bcrypt from 'bcryptjs'
 
 /**
  * @param { import("knex").Knex } knex
@@ -52,7 +52,7 @@ export async function seed(knex) {
       category: 'hdpe_bags',
       description: 'Heavy-duty HDPE woven sacks for industrial packaging. Available in various sizes and GSM weights.',
       description_bn: 'শিল্প প্যাকেজিংয়ের জন্য ভারী-শক্তিশালী এইচডিপিই ওভেন স্যাক। বিভিন্ন আকার এবং জিএসএম ওজনে পাওয়া যায়।',
-      images: JSON.stringify(['/images/hdpe-sack-1.jpg', '/images/hdpe-sack-2.jpg']),
+      images: JSON.stringify(['/images/hdpe-sack-1.svg', '/images/hdpe-sack-2.svg']),
       base_specs: JSON.stringify({
         material: 'HDPE',
         gsm: 80,
@@ -78,7 +78,7 @@ export async function seed(knex) {
       category: 'bopp_film',
       description: 'High-quality BOPP film for packaging and lamination. Excellent clarity and printability.',
       description_bn: 'প্যাকেজিং এবং ল্যামিনেশনের জন্য উচ্চ মানের বিওপিপি ফিল্ম। চমৎকার স্বচ্ছতা এবং মুদ্রণযোগ্যতা।',
-      images: JSON.stringify(['/images/bopp-film-1.jpg', '/images/bopp-film-2.jpg']),
+      images: JSON.stringify(['/images/bopp-film-1.svg', '/images/bopp-film-2.svg']),
       base_specs: JSON.stringify({
         material: 'BOPP',
         thickness: 20,
@@ -104,7 +104,7 @@ export async function seed(knex) {
       category: 'yarn',
       description: 'Polypropylene yarn for weaving and knitting applications. Consistent quality and strength.',
       description_bn: 'বোনা এবং বোধাই প্রয়োগের জন্য পলিপ্রোপাইলিন ইয়ার্ন। সামঞ্জস্যপূর্ণ মান এবং শক্তি।',
-      images: JSON.stringify(['/images/pp-yarn-1.jpg', '/images/pp-yarn-2.jpg']),
+      images: JSON.stringify(['/images/pp-yarn-1.svg', '/images/pp-yarn-2.svg']),
       base_specs: JSON.stringify({
         material: 'PP',
         denier: 600,
@@ -130,7 +130,7 @@ export async function seed(knex) {
       category: 'ldpe_film',
       description: 'Premium LDPE shrink film for product packaging. Excellent shrinkage properties and clarity.',
       description_bn: 'পণ্য প্যাকেজিংয়ের জন্য প্রিমিয়াম এলডিপিই শ্রিঙ্ক ফিল্ম। চমৎকার সংকোচন বৈশিষ্ট্য এবং স্বচ্ছতা।',
-      images: JSON.stringify(['/images/ldpe-shrink-1.jpg', '/images/ldpe-shrink-2.jpg']),
+      images: JSON.stringify(['/images/ldpe-shrink-1.svg', '/images/ldpe-shrink-2.svg']),
       base_specs: JSON.stringify({
         material: 'LDPE',
         thickness: 30,

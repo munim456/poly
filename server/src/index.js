@@ -47,6 +47,19 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() })
 })
 
+// Serve built client (production single-service deployment)
+const clientDist = path.join(__dirname, '../../client/dist')
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(clientDist))
+  // SPA fallback for client-side routes
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api/') || req.path.startsWith('/uploads/')) {
+      return next()
+    }
+    res.sendFile(path.join(clientDist, 'index.html'))
+  })
+}
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack)

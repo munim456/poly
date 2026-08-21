@@ -2,6 +2,7 @@ import express from 'express'
 import { body, query, validationResult } from 'express-validator'
 import db from '../config/database.js'
 import { authenticateToken, requireRole } from '../middleware/auth.js'
+import { parseMaybeJson } from '../utils/parse.js'
 
 const router = express.Router()
 
@@ -47,8 +48,8 @@ router.get('/', [
     // Parse JSON fields
     const parsedProducts = products.map(p => ({
       ...p,
-      images: JSON.parse(p.images || '[]'),
-      base_specs: JSON.parse(p.base_specs || '{}'),
+      images: parseMaybeJson(p.images, []),
+      base_specs: parseMaybeJson(p.base_specs, {}),
     }))
 
     res.json({
@@ -91,12 +92,12 @@ router.get('/:id', async (req, res) => {
 
     const parsedProduct = {
       ...product,
-      images: JSON.parse(product.images || '[]'),
-      base_specs: JSON.parse(product.base_specs || '{}'),
-      wholesale_price_tiers: JSON.parse(product.wholesale_price_tiers || '[]'),
+      images: parseMaybeJson(product.images, []),
+      base_specs: parseMaybeJson(product.base_specs, {}),
+      wholesale_price_tiers: parseMaybeJson(product.wholesale_price_tiers, []),
       quality_batch: latestQualityBatch ? {
         ...latestQualityBatch,
-        measured_values: JSON.parse(latestQualityBatch.measured_values || '{}'),
+        measured_values: parseMaybeJson(latestQualityBatch.measured_values, {}),
       } : null,
     }
 
