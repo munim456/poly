@@ -214,3 +214,12 @@
 .infoCard li {
   margin-bottom: var(--space-2);
 }
+
+.fileName {
+  display: inline-block;
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.04em;
+  color: var(--resin-blue);
+}

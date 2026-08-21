@@ -65,18 +65,29 @@ router.get('/pending', authenticateToken, requireRole('owner'), async (req, res)
 })
 
 // POST /api/quality (quality staff creates batch)
-router.post('/', authenticateToken, requireRole('quality', 'owner'), [
-  body('product_id').isInt(),
-  body('batch_date').isISO8601(),
-  body('measured_values').isObject(),
-], upload.single('certification_file'), async (req, res) => {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() })
-  }
+router.post('/', authenticateToken, requireRole('quality', 'owner'),
+  upload.single('certification_file'),
+  [
+    body('product_id').isInt(),
+    body('batch_date').isISO8601(),
+    body('measured_values').custom((value) => {
+      try {
+        const parsed = typeof value === 'string' ? JSON.parse(value) : value
+        return parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+      } catch {
+        return false
+      }
+    }),
+  ],
+  async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
 
-  const { product_id, batch_date, measured_values } = req.body
-  const certification_file_url = req.file ? `/uploads/${req.file.filename}` : null
+    const { product_id, batch_date, measured_values: rawMeasured } = req.body
+    const measured_values = typeof rawMeasured === 'string' ? JSON.parse(rawMeasured) : rawMeasured
+    const certification_file_url = req.file ? `/uploads/${req.file.filename}` : null
 
   try {
     const [batch] = await db('quality_batches').insert({

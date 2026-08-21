@@ -62,6 +62,13 @@ if (process.env.NODE_ENV === 'production') {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
+  if (err.code === 'LIMIT_FILE_SIZE') {
+    return res.status(400).json({ error: 'File too large (max 10MB)' })
+  }
+  if (err.message && err.name === 'Error') {
+    console.error(err.stack)
+    return res.status(400).json({ error: err.message })
+  }
   console.error(err.stack)
   res.status(500).json({ error: 'Something went wrong!' })
 })

@@ -179,6 +179,16 @@ function ProductDetail() {
                       </div>
                     ))}
                   </div>
+                  {product.quality_batch.certification_file_url && (
+                    <a
+                      href={product.quality_batch.certification_file_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.reportLink}
+                    >
+                      {t('product.testReport')}
+                    </a>
+                  )}
                 </div>
               </div>
             )}

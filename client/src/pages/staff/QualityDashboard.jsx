@@ -19,6 +19,7 @@ function QualityDashboard() {
       tensile_strength: '',
     },
   })
+  const [file, setFile] = useState(null)
 
   useEffect(() => {
     fetchProducts()
@@ -49,17 +50,32 @@ function QualityDashboard() {
     })
   }
 
+  const handleFileChange = (e) => {
+    const selected = e.target.files[0]
+    if (selected && selected.size > 10 * 1024 * 1024) {
+      setError(t('qd.fileTooLarge'))
+      e.target.value = ''
+      return
+    }
+    setError('')
+    setFile(selected || null)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
     setSubmitting(true)
 
     try {
-      await api.post('/quality', {
-        product_id: parseInt(formData.product_id),
-        batch_date: formData.batch_date,
-        measured_values: formData.measured_values,
-      })
+      const payload = new FormData()
+      payload.append('product_id', formData.product_id)
+      payload.append('batch_date', formData.batch_date)
+      payload.append('measured_values', JSON.stringify(formData.measured_values))
+      if (file) {
+        payload.append('certification_file', file)
+      }
+
+      await api.post('/quality', payload)
       // Reset form
       setFormData({
         product_id: '',
@@ -70,6 +86,7 @@ function QualityDashboard() {
           tensile_strength: '',
         },
       })
+      setFile(null)
       alert(t('qd.submittedMsg'))
     } catch (err) {
       setError(err.response?.data?.error || t('qd.failedMsg'))
@@ -161,9 +178,13 @@ function QualityDashboard() {
               <input
                 type="file"
                 accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                onChange={handleFileChange}
                 className={styles.fileInput}
               />
               <span className={styles.hint}>{t('qd.uploadHint')}</span>
+              {file && (
+                <span className={styles.fileName}>{file.name}</span>
+              )}
             </div>
 
             {/* Submit */}
