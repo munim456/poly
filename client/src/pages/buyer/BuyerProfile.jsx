@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../../context/LanguageContext'
 import api from '../../services/api'
 import styles from './BuyerProfile.module.css'
 
 function BuyerProfile() {
+  const { t } = useLanguage()
   const [profile, setProfile] = useState(null)
   const [form, setForm] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -43,9 +45,9 @@ function BuyerProfile() {
     try {
       const res = await api.put('/buyers/profile', form)
       setProfile(res.data.buyer)
-      setMessage({ type: 'success', text: 'Profile updated successfully' })
+      setMessage({ type: 'success', text: t('profile.updateSuccess') })
     } catch (err) {
-      setMessage({ type: 'error', text: 'Failed to update profile' })
+      setMessage({ type: 'error', text: t('profile.updateError') })
     } finally {
       setSaving(false)
     }
@@ -55,7 +57,7 @@ function BuyerProfile() {
     return (
       <div className={styles.page}>
         <div className="container">
-          <p className={styles.loading}>Loading…</p>
+          <p className={styles.loading}>{t('common.loading')}</p>
         </div>
       </div>
     )
@@ -64,7 +66,7 @@ function BuyerProfile() {
   return (
     <div className={styles.page}>
       <div className="container">
-        <h1 className={styles.title}>Company Profile</h1>
+        <h1 className={styles.title}>{t('profile.title')}</h1>
 
         {message && (
           <p className={`${styles.message} ${message.type === 'success' ? styles.success : styles.error}`}>
@@ -75,10 +77,10 @@ function BuyerProfile() {
         <div className={styles.layout}>
           {/* Editable form */}
           <form onSubmit={handleSave} className={styles.formPanel}>
-            <h2 className={styles.panelTitle}>Editable Details</h2>
+            <h2 className={styles.panelTitle}>{t('profile.editableDetails')}</h2>
             <div className={styles.formGrid}>
               <label className={styles.field}>
-                <span className={styles.label}>Company Name</span>
+                <span className={styles.label}>{t('profile.companyName')}</span>
                 <input
                   type="text"
                   name="company_name"
@@ -89,7 +91,7 @@ function BuyerProfile() {
                 />
               </label>
               <label className={styles.field}>
-                <span className={styles.label}>Contact Person</span>
+                <span className={styles.label}>{t('profile.contactPerson')}</span>
                 <input
                   type="text"
                   name="contact_person"
@@ -100,7 +102,7 @@ function BuyerProfile() {
                 />
               </label>
               <label className={styles.field}>
-                <span className={styles.label}>Phone</span>
+                <span className={styles.label}>{t('profile.phone')}</span>
                 <input
                   type="tel"
                   name="phone"
@@ -111,7 +113,7 @@ function BuyerProfile() {
                 />
               </label>
               <label className={styles.field}>
-                <span className={styles.label}>City</span>
+                <span className={styles.label}>{t('profile.city')}</span>
                 <input
                   type="text"
                   name="city"
@@ -122,7 +124,7 @@ function BuyerProfile() {
               </label>
             </div>
             <label className={styles.field}>
-              <span className={styles.label}>Address</span>
+              <span className={styles.label}>{t('profile.address')}</span>
               <textarea
                 name="address"
                 value={form.address}
@@ -132,24 +134,24 @@ function BuyerProfile() {
               />
             </label>
             <button type="submit" disabled={saving} className={styles.saveBtn}>
-              {saving ? 'Saving…' : 'Save Changes'}
+              {saving ? t('profile.saving') : t('profile.saveChanges')}
             </button>
           </form>
 
           {/* Read-only account info */}
           <aside className={styles.infoPanel}>
-            <h2 className={styles.panelTitle}>Account Info</h2>
+            <h2 className={styles.panelTitle}>{t('profile.accountInfo')}</h2>
             <dl className={styles.infoList}>
               <div className={styles.infoRow}>
-                <dt>Email</dt>
+                <dt>{t('profile.email')}</dt>
                 <dd>{profile?.email}</dd>
               </div>
               <div className={styles.infoRow}>
-                <dt>Account Type</dt>
+                <dt>{t('profile.accountType')}</dt>
                 <dd className={styles.mono}>{profile?.buyer_type}</dd>
               </div>
               <div className={styles.infoRow}>
-                <dt>Verification</dt>
+                <dt>{t('profile.verification')}</dt>
                 <dd>
                   <span className={`${styles.badge} ${styles[profile?.verification_status]}`}>
                     {profile?.verification_status}
@@ -157,18 +159,16 @@ function BuyerProfile() {
                 </dd>
               </div>
               <div className={styles.infoRow}>
-                <dt>Country</dt>
+                <dt>{t('profile.country')}</dt>
                 <dd>{profile?.country}</dd>
               </div>
             </dl>
-            <p className={styles.hint}>
-              Verification is reviewed by our sales team after your first order.
-            </p>
+            <p className={styles.hint}>{t('profile.verificationHint')}</p>
           </aside>
         </div>
 
         <Link to="/buyer/dashboard" className={styles.backLink}>
-          ← Back to Dashboard
+          {t('profile.back')}
         </Link>
       </div>
     </div>

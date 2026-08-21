@@ -120,23 +120,23 @@ function SalesDashboard() {
         <div className={styles.statsGrid}>
           <div className={styles.statCard}>
             <span className={styles.statValue}>{pendingOrders.length}</span>
-            <span className={styles.statLabel}>Pending Orders</span>
+            <span className={styles.statLabel}>{t('sales.pendingOrders')}</span>
           </div>
           <div className={styles.statCard}>
             <span className={styles.statValue}>{activeOrders.length}</span>
-            <span className={styles.statLabel}>Active Orders</span>
+            <span className={styles.statLabel}>{t('sales.activeOrders')}</span>
           </div>
           <div className={styles.statCard}>
             <span className={styles.statValue}>{orders.length}</span>
-            <span className={styles.statLabel}>Total Orders</span>
+            <span className={styles.statLabel}>{t('sales.totalOrders')}</span>
           </div>
         </div>
 
         {/* Pending Orders */}
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Pending Orders</h2>
+          <h2 className={styles.sectionTitle}>{t('sales.pendingOrders')}</h2>
           {pendingOrders.length === 0 ? (
-            <p className={styles.empty}>No pending orders</p>
+            <p className={styles.empty}>{t('sales.noPending')}</p>
           ) : (
             <div className={styles.ordersList}>
               {pendingOrders.map(order => (
@@ -144,22 +144,22 @@ function SalesDashboard() {
                   <div className={styles.orderHeader}>
                     <span className={styles.orderId}>#{order.id}</span>
                     <span className={`${styles.statusBadge} ${styles[order.status]}`}>
-                      {order.status.replace('_', ' ')}
+                      {t(`order.status.${order.status}`)}
                     </span>
                   </div>
                   <p className={styles.product}>{order.product_name}</p>
                   <p className={styles.details}>
-                    Qty: {order.quantity} kg | {order.company_name}
+                    {t('sales.quantity')}: {order.quantity} kg | {order.company_name}
                   </p>
                   {order.current_offer_price && (
-                    <p className={styles.price}>Current offer: ৳{order.current_offer_price}/kg</p>
+                    <p className={styles.price}>{t('sales.buyerOffered')}: ৳{order.current_offer_price}/kg</p>
                   )}
                   <div className={styles.actions}>
                     <button 
                       onClick={() => openOrder(order)}
                       className={styles.viewBtn}
                     >
-                      View
+                      {t('sales.view')}
                     </button>
                   </div>
                 </div>
@@ -170,9 +170,9 @@ function SalesDashboard() {
 
         {/* Active Orders */}
         <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Active Orders</h2>
+          <h2 className={styles.sectionTitle}>{t('sales.activeOrders')}</h2>
           {activeOrders.length === 0 ? (
-            <p className={styles.empty}>No active orders</p>
+            <p className={styles.empty}>{t('sales.noActive')}</p>
           ) : (
             <div className={styles.ordersList}>
               {activeOrders.map(order => (
@@ -180,12 +180,12 @@ function SalesDashboard() {
                   <div className={styles.orderHeader}>
                     <span className={styles.orderId}>#{order.id}</span>
                     <span className={`${styles.statusBadge} ${styles[order.status]}`}>
-                      {order.status.replace('_', ' ')}
+                      {t(`order.status.${order.status}`)}
                     </span>
                   </div>
                   <p className={styles.product}>{order.product_name}</p>
                   <p className={styles.details}>
-                    Qty: {order.quantity} kg | {order.company_name}
+                    {t('sales.quantity')}: {order.quantity} kg | {order.company_name}
                   </p>
                   <div className={styles.actions}>
                     {order.status === 'confirmed' && (
@@ -193,7 +193,7 @@ function SalesDashboard() {
                         onClick={() => handleStatusUpdate(order.id, 'in_production')}
                         className={styles.updateBtn}
                       >
-                        Mark In Production
+                        {t('sales.markInProduction')}
                       </button>
                     )}
                     {order.status === 'in_production' && (
@@ -201,7 +201,7 @@ function SalesDashboard() {
                         onClick={() => handleStatusUpdate(order.id, 'ready')}
                         className={styles.updateBtn}
                       >
-                        Mark Ready
+                        {t('sales.markReady')}
                       </button>
                     )}
                     {order.status === 'ready' && (
@@ -209,7 +209,7 @@ function SalesDashboard() {
                         onClick={() => handleStatusUpdate(order.id, 'dispatched')}
                         className={styles.updateBtn}
                       >
-                        Mark Dispatched
+                        {t('sales.markDispatched')}
                       </button>
                     )}
                   </div>
@@ -224,26 +224,26 @@ function SalesDashboard() {
           <div className={styles.modal}>
             <div className={styles.modalContent}>
               <div className={styles.modalHeader}>
-                <h3>Order #{selectedOrder.id}</h3>
+                <h3>#{selectedOrder.id}</h3>
                 <button onClick={closeModal} className={styles.closeBtn}>×</button>
               </div>
               <div className={styles.modalBody}>
-                <p><strong>Company:</strong> {selectedOrder.company_name}</p>
-                <p><strong>Product:</strong> {selectedOrder.product_name}</p>
-                <p><strong>Quantity:</strong> {selectedOrder.quantity} kg</p>
-                <p><strong>Type:</strong> {selectedOrder.purchase_type}</p>
+                <p><strong>{t('sales.company')}:</strong> {selectedOrder.company_name}</p>
+                <p><strong>{t('sales.product')}:</strong> {selectedOrder.product_name}</p>
+                <p><strong>{t('sales.quantity')}:</strong> {selectedOrder.quantity} kg</p>
+                <p><strong>{t('sales.type')}:</strong> {selectedOrder.purchase_type}</p>
                 {selectedOrder.requested_price && (
-                  <p><strong>Buyer Offered:</strong> ৳{selectedOrder.requested_price}/kg</p>
+                  <p><strong>{t('sales.buyerOffered')}:</strong> ৳{selectedOrder.requested_price}/kg</p>
                 )}
                 {selectedOrder.notes && (
-                  <p><strong>Notes:</strong> {selectedOrder.notes}</p>
+                  <p><strong>{t('sales.notes')}:</strong> {selectedOrder.notes}</p>
                 )}
 
                 {/* Negotiation Thread */}
                 {thread && (
                   <div className={styles.negoSection}>
                     <h4 className={styles.negoTitle}>
-                      Negotiation — {thread.status}
+                      {t('sales.negotiation')} — {thread.status}
                     </h4>
                     <div className={styles.messageList}>
                       {thread.messages.map((msg) => (
@@ -264,7 +264,7 @@ function SalesDashboard() {
                       <>
                         <form onSubmit={handleCounter} className={styles.counterForm}>
                           <label className={styles.counterLabel} htmlFor="counter-price">
-                            Counter Offer (৳/kg)
+                            {t('sales.counterOffer')}
                           </label>
                           <div className={styles.inputRow}>
                             <input
@@ -282,11 +282,11 @@ function SalesDashboard() {
                               type="text"
                               value={counterNote}
                               onChange={(e) => setCounterNote(e.target.value)}
-                              placeholder="Note (optional)"
+                              placeholder={t('sales.noteOptional')}
                               className={styles.noteInput}
                             />
                             <button type="submit" disabled={sending} className={styles.sendBtn}>
-                              Send
+                              {t('sales.send')}
                             </button>
                           </div>
                         </form>
@@ -296,24 +296,24 @@ function SalesDashboard() {
                             disabled={sending || thread.status !== 'countered'}
                             className={styles.acceptBtn}
                           >
-                            Accept Buyer Offer
+                            {t('sales.acceptBuyerOffer')}
                           </button>
                           <button
                             onClick={handleReject}
                             disabled={sending}
                             className={styles.rejectBtn}
                           >
-                            Reject
+                            {t('sales.reject')}
                           </button>
                         </div>
                       </>
                     )}
 
                     {thread.status === 'accepted' && (
-                      <p className={styles.negoClosed}>Offer accepted — order confirmed.</p>
+                      <p className={styles.negoClosed}>{t('sales.acceptedMsg')}</p>
                     )}
                     {thread.status === 'rejected' && (
-                      <p className={styles.negoClosed}>Negotiation rejected.</p>
+                      <p className={styles.negoClosed}>{t('sales.rejectedMsg')}</p>
                     )}
                   </div>
                 )}
@@ -324,14 +324,14 @@ function SalesDashboard() {
                     onClick={() => handleStatusUpdate(selectedOrder.id, 'confirmed')}
                     className={styles.confirmBtn}
                   >
-                    Confirm Order
+                    {t('sales.confirmOrder')}
                   </button>
                 )}
                 <button 
                   onClick={closeModal}
                   className={styles.cancelBtn}
                 >
-                  Close
+                  {t('sales.close')}
                 </button>
               </div>
             </div>

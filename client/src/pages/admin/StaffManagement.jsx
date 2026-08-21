@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react'
+﻿import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../../context/LanguageContext'
 import api from '../../services/api'
 import styles from './StaffManagement.module.css'
 
 function StaffManagement() {
+  const { t } = useLanguage()
   const [staff, setStaff] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -20,7 +22,7 @@ function StaffManagement() {
       const res = await api.get('/admin/staff')
       setStaff(res.data.staff)
     } catch (err) {
-      setError('Failed to load staff accounts')
+      setError(t('common.error'))
       console.error(err)
     } finally {
       setLoading(false)
@@ -37,7 +39,7 @@ function StaffManagement() {
       setShowForm(false)
       fetchStaff()
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to create staff account')
+      setError(err.response?.data?.error || t('common.error'))
     } finally {
       setSubmitting(false)
     }
@@ -61,13 +63,18 @@ function StaffManagement() {
     }
   }
 
+  const roleLabel = (role) =>
+    role === 'sales' ? t('staff.roleSales')
+    : role === 'quality' ? t('staff.roleQuality')
+    : t('staff.roleOwner')
+
   return (
     <div className={styles.page}>
       <div className="container">
         <div className={styles.titleRow}>
-          <h1 className={styles.title}>Staff Accounts</h1>
+          <h1 className={styles.title}>{t('staff.title')}</h1>
           <button onClick={() => setShowForm(!showForm)} className={styles.toggleBtn}>
-            {showForm ? 'Cancel' : '+ Add Staff'}
+            {showForm ? t('common.cancel') : t('staff.add')}
           </button>
         </div>
 
@@ -75,10 +82,10 @@ function StaffManagement() {
 
         {showForm && (
           <form onSubmit={handleCreate} className={styles.formPanel}>
-            <h2 className={styles.panelTitle}>New Staff Account</h2>
+            <h2 className={styles.panelTitle}>{t('staff.newTitle')}</h2>
             <div className={styles.formGrid}>
               <label className={styles.field}>
-                <span className={styles.label}>Name</span>
+                <span className={styles.label}>{t('staff.name')}</span>
                 <input
                   type="text"
                   value={form.name}
@@ -88,7 +95,7 @@ function StaffManagement() {
                 />
               </label>
               <label className={styles.field}>
-                <span className={styles.label}>Email</span>
+                <span className={styles.label}>{t('staff.email')}</span>
                 <input
                   type="email"
                   value={form.email}
@@ -98,7 +105,7 @@ function StaffManagement() {
                 />
               </label>
               <label className={styles.field}>
-                <span className={styles.label}>Password</span>
+                <span className={styles.label}>{t('staff.password')}</span>
                 <input
                   type="password"
                   value={form.password}
@@ -109,36 +116,36 @@ function StaffManagement() {
                 />
               </label>
               <label className={styles.field}>
-                <span className={styles.label}>Role</span>
+                <span className={styles.label}>{t('staff.role')}</span>
                 <select
                   value={form.role}
                   onChange={(e) => setForm({ ...form, role: e.target.value })}
                   className={styles.input}
                 >
-                  <option value="sales">Sales</option>
-                  <option value="quality">Quality</option>
-                  <option value="owner">Owner</option>
+                  <option value="sales">{t('staff.roleSales')}</option>
+                  <option value="quality">{t('staff.roleQuality')}</option>
+                  <option value="owner">{t('staff.roleOwner')}</option>
                 </select>
               </label>
             </div>
             <button type="submit" disabled={submitting} className={styles.submitBtn}>
-              {submitting ? 'Creating…' : 'Create Account'}
+              {submitting ? t('staff.creating') : t('staff.create')}
             </button>
           </form>
         )}
 
         {loading ? (
-          <p className={styles.loading}>Loading…</p>
+          <p className={styles.loading}>{t('common.loading')}</p>
         ) : (
           <div className={styles.tableWrap}>
             <table className={styles.table}>
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th>{t('staff.colName')}</th>
+                  <th>{t('staff.colEmail')}</th>
+                  <th>{t('staff.colRole')}</th>
+                  <th>{t('staff.colStatus')}</th>
+                  <th>{t('staff.colActions')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -152,14 +159,14 @@ function StaffManagement() {
                         onChange={(e) => handleRoleChange(member.id, e.target.value)}
                         className={styles.roleSelect}
                       >
-                        <option value="sales">sales</option>
-                        <option value="quality">quality</option>
-                        <option value="owner">owner</option>
+                        <option value="sales">{t('staff.roleSales')}</option>
+                        <option value="quality">{t('staff.roleQuality')}</option>
+                        <option value="owner">{t('staff.roleOwner')}</option>
                       </select>
                     </td>
                     <td>
                       <span className={`${styles.badge} ${member.is_active ? styles.active : styles.inactive}`}>
-                        {member.is_active ? 'Active' : 'Disabled'}
+                        {member.is_active ? t('staff.active') : t('staff.disabled')}
                       </span>
                     </td>
                     <td>
@@ -167,7 +174,7 @@ function StaffManagement() {
                         onClick={() => handleToggleActive(member)}
                         className={member.is_active ? styles.disableBtn : styles.enableBtn}
                       >
-                        {member.is_active ? 'Disable' : 'Enable'}
+                        {member.is_active ? t('staff.disable') : t('staff.enable')}
                       </button>
                     </td>
                   </tr>
@@ -178,7 +185,7 @@ function StaffManagement() {
         )}
 
         <Link to="/admin/dashboard" className={styles.backLink}>
-          ← Back to Dashboard
+          {t('staff.back')}
         </Link>
       </div>
     </div>

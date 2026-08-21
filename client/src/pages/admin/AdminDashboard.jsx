@@ -56,23 +56,23 @@ function AdminDashboard() {
 
         {/* Quick Actions */}
         <div className={styles.actionsSection}>
-          <h2 className={styles.sectionTitle}>Quick Actions</h2>
+          <h2 className={styles.sectionTitle}>{t('admin.quickActions')}</h2>
           <div className={styles.actionsGrid}>
             <Link to="/admin/products" className={styles.actionCard}>
               <span className={styles.actionIcon}><BagIcon size={24} /></span>
-              <span className={styles.actionTitle}>Manage Products</span>
+              <span className={styles.actionTitle}>{t('nav.products')}</span>
             </Link>
             <Link to="/admin/quality" className={styles.actionCard}>
               <span className={styles.actionIcon}><CheckCircleIcon size={24} /></span>
-              <span className={styles.actionTitle}>Approve Quality Data</span>
+              <span className={styles.actionTitle}>{t('admin.approveQuality')}</span>
             </Link>
             <Link to="/admin/staff" className={styles.actionCard}>
               <span className={styles.actionIcon}><ShieldCheckIcon size={24} /></span>
-              <span className={styles.actionTitle}>Manage Staff</span>
+              <span className={styles.actionTitle}>{t('staff.title')}</span>
             </Link>
             <Link to="/admin/buyers" className={styles.actionCard}>
               <span className={styles.actionIcon}><BagIcon size={24} /></span>
-              <span className={styles.actionTitle}>Manage Buyers</span>
+              <span className={styles.actionTitle}>{t('buyerMgmt.title')}</span>
             </Link>
           </div>
         </div>

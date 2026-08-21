@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { useLanguage } from '../../context/LanguageContext'
 import api from '../../services/api'
 import styles from './BuyerManagement.module.css'
 
 function BuyerManagement() {
+  const { t } = useLanguage()
   const [buyers, setBuyers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -18,7 +20,7 @@ function BuyerManagement() {
       const res = await api.get('/buyers')
       setBuyers(res.data.buyers)
     } catch (err) {
-      setError('Failed to load buyer accounts')
+      setError(t('common.error'))
       console.error(err)
     } finally {
       setLoading(false)
@@ -52,7 +54,7 @@ function BuyerManagement() {
     <div className={styles.page}>
       <div className="container">
         <div className={styles.titleRow}>
-          <h1 className={styles.title}>Buyer Accounts</h1>
+          <h1 className={styles.title}>{t('buyerMgmt.title')}</h1>
           <div className={styles.filters}>
             {['all', 'unverified', 'pending', 'verified'].map((f) => (
               <button
@@ -60,7 +62,7 @@ function BuyerManagement() {
                 onClick={() => setFilter(f)}
                 className={`${styles.filterBtn} ${filter === f ? styles.filterActive : ''}`}
               >
-                {f}
+                {f === 'all' ? t('buyerMgmt.filterAll') : f}
               </button>
             ))}
           </div>
@@ -69,20 +71,20 @@ function BuyerManagement() {
         {error && <p className={styles.error}>{error}</p>}
 
         {loading ? (
-          <p className={styles.loading}>Loading…</p>
+          <p className={styles.loading}>{t('common.loading')}</p>
         ) : filtered.length === 0 ? (
-          <p className={styles.empty}>No buyer accounts</p>
+          <p className={styles.empty}>{t('buyerMgmt.empty')}</p>
         ) : (
           <div className={styles.tableWrap}>
             <table className={styles.table}>
               <thead>
                 <tr>
-                  <th>Company</th>
-                  <th>Contact</th>
-                  <th>Type</th>
-                  <th>Verification</th>
-                  <th>Status</th>
-                  <th>Actions</th>
+                  <th>{t('buyerMgmt.colCompany')}</th>
+                  <th>{t('buyerMgmt.colContact')}</th>
+                  <th>{t('buyerMgmt.colType')}</th>
+                  <th>{t('buyerMgmt.colVerification')}</th>
+                  <th>{t('buyerMgmt.colStatus')}</th>
+                  <th>{t('buyerMgmt.colActions')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,7 +106,7 @@ function BuyerManagement() {
                     </td>
                     <td>
                       <span className={`${styles.badge} ${buyer.is_active ? styles.active : styles.inactive}`}>
-                        {buyer.is_active ? 'Active' : 'Disabled'}
+                        {buyer.is_active ? t('buyerMgmt.active') : t('buyerMgmt.inactive')}
                       </span>
                     </td>
                     <td>
@@ -114,7 +116,7 @@ function BuyerManagement() {
                             onClick={() => handleVerify(buyer.id, 'verified')}
                             className={styles.verifyBtn}
                           >
-                            Verify
+                            {t('buyerMgmt.verify')}
                           </button>
                         )}
                         {buyer.verification_status === 'verified' && (
@@ -122,14 +124,14 @@ function BuyerManagement() {
                             onClick={() => handleVerify(buyer.id, 'unverified')}
                             className={styles.unverifyBtn}
                           >
-                            Unverify
+                            {t('buyerMgmt.unverify')}
                           </button>
                         )}
                         <button
                           onClick={() => handleToggleActive(buyer)}
                           className={buyer.is_active ? styles.disableBtn : styles.enableBtn}
                         >
-                          {buyer.is_active ? 'Disable' : 'Enable'}
+                          {buyer.is_active ? t('buyerMgmt.disable') : t('buyerMgmt.enable')}
                         </button>
                       </div>
                     </td>
@@ -141,7 +143,7 @@ function BuyerManagement() {
         )}
 
         <Link to="/admin/dashboard" className={styles.backLink}>
-          ← Back to Dashboard
+          {t('buyerMgmt.back')}
         </Link>
       </div>
     </div>
