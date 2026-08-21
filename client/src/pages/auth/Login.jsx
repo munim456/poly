@@ -81,6 +81,9 @@ function Login() {
           <button type="submit" className={styles.submitBtn} disabled={loading}>
             {loading ? t('common.loading') : t('auth.login.submit')}
           </button>
+          <Link to="/forgot-password" className={styles.switchLink}>
+            {t('auth.forgot.title')}
+          </Link>
         </form>
         
         <p className={styles.switchText}>

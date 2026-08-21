@@ -232,3 +232,59 @@ export async function sendNegotiationMessageNotification({
     label: `Negotiation update for order #${order.id}`,
   })
 }
+
+// ---------------------------------------------------------------------------
+// Buyer: password reset
+// ---------------------------------------------------------------------------
+
+export function buildBuyerResetEmail({ contactName, resetUrl, expiryMinutes }) {
+  const name = contactName || 'there'
+  const subject = 'Reset your PolyConnect password'
+
+  const html = `
+    <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;">
+      <div style="background:#0b1f3a;padding:20px 24px;">
+        <h2 style="color:#ffffff;margin:0;font-size:18px;">PolyConnect — Password Reset</h2>
+      </div>
+      <div style="border:1px solid #e5e9ee;border-top:none;padding:24px;">
+        <p style="color:#0b1f3a;font-size:14px;">Hello ${name},</p>
+        <p style="color:#55636f;font-size:14px;line-height:1.6;">
+          We received a request to reset your account password. Click the button below
+          to choose a new one. This link is valid for ${expiryMinutes} minutes and can be used once.
+        </p>
+        <p style="margin:24px 0;">
+          <a href="${resetUrl}"
+             style="background:#1e4e79;color:#ffffff;padding:12px 24px;text-decoration:none;
+                    font-size:14px;display:inline-block;">
+            Reset Password
+          </a>
+        </p>
+        <p style="color:#55636f;font-size:13px;line-height:1.6;">
+          If you did not request this, you can safely ignore this email —
+          your password will not change.
+        </p>
+        <hr style="border:none;border-top:1px solid #e5e9ee;margin:20px 0;" />
+        <p style="color:#8b98a5;font-size:12px;word-break:break-all;">
+          If the button does not work, copy this link into your browser:<br />
+          ${resetUrl}
+        </p>
+      </div>
+    </div>`
+
+  return {
+    subject,
+    text: `Hello ${name},\n\nReset your PolyConnect password using this link (valid ${expiryMinutes} minutes):\n${resetUrl}\n\nIf you did not request this, ignore this email.`,
+    html,
+  }
+}
+
+export async function sendBuyerResetEmail({ email, contactName, resetUrl, expiryMinutes }) {
+  const { subject, text, html } = buildBuyerResetEmail({ contactName, resetUrl, expiryMinutes })
+  return sendOrSkip({
+    to: email,
+    subject,
+    text,
+    html,
+    label: `Password reset for ${email}`,
+  })
+}

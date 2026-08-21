@@ -39,6 +39,35 @@
   margin-bottom: var(--space-4);
 }
 
+.successText {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--status-success-bg);
+  border: 1px solid currentColor;
+  color: var(--status-success);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+.helpText {
+  color: var(--slate-gray);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.backToLogin {
+  display: inline-block;
+  color: var(--link);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.backToLogin:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .form {
   display: flex;
   flex-direction: column;
