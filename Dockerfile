@@ -14,8 +14,7 @@ RUN cd server && (npm ci --omit=dev || npm install --omit=dev)
 RUN cd client && npm run build
 
 ENV NODE_ENV=production
-ENV PORT=8000
 
-EXPOSE 8000
+EXPOSE 10000
 
 CMD ["node", "server/src/index.js"]
