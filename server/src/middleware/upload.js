@@ -52,6 +52,6 @@ export const imageUpload = multer({
   storage: multer.memoryStorage(),
   fileFilter: imageFileFilter,
   limits: {
-    fileSize: 2 * 1024 * 1024, // 2MB limit per photo
+    fileSize: 5 * 1024 * 1024, // 5MB limit per photo
   }
 })

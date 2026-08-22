@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLanguage } from '../../context/LanguageContext'
 import api from '../../services/api'
+import { compressImage } from '../../utils/imageCompress'
 import styles from './ProductManagement.module.css'
 
 function ProductManagement() {
@@ -87,8 +88,9 @@ function ProductManagement() {
     setUploadingPhoto(true)
 
     try {
+      const optimized = await compressImage(file)
       const data = new FormData()
-      data.append('image', file)
+      data.append('image', optimized)
       const res = await api.post('/admin/uploads', data, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
