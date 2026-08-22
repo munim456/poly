@@ -241,7 +241,14 @@
     "active": "Active",
     "inactive": "Inactive",
     "deactivate": "Deactivate",
-    "deactivateConfirm": "Are you sure you want to deactivate this product?"
+    "deactivateConfirm": "Are you sure you want to deactivate this product?",
+    "photos": {
+      "label": "Product Photos",
+      "add": "+ Add Photo",
+      "uploading": "...",
+      "hint": "JPEG, PNG, WebP or GIF — up to 2MB each. First photo shows on the catalog.",
+      "uploadFailed": "Photo upload failed. Try a smaller image."
+    }
   },
   "qd": {
     "logBatch": "Log New Quality Batch",

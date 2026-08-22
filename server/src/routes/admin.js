@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import { body, validationResult } from 'express-validator'
 import db from '../config/database.js'
 import { authenticateToken, requireRole } from '../middleware/auth.js'
+import { imageUpload } from '../middleware/upload.js'
 
 const router = express.Router()
 
@@ -233,6 +234,34 @@ router.get('/analytics', async (req, res) => {
     console.error('Analytics fetch error:', error)
     res.status(500).json({ error: 'Failed to fetch analytics' })
   }
+})
+
+// POST /api/admin/uploads — store a product photo in the database
+router.post('/uploads', (req, res) => {
+  imageUpload.single('image')(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ error: err.message })
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: 'No photo provided' })
+    }
+
+    db('uploads')
+      .insert({
+        filename: req.file.originalname,
+        mime_type: req.file.mimetype,
+        size_bytes: req.file.size,
+        data: req.file.buffer,
+      })
+      .returning('id')
+      .then(([row]) => {
+        res.status(201).json({ url: `/api/uploads/${row.id}` })
+      })
+      .catch((error) => {
+        console.error('Upload save error:', error)
+        res.status(500).json({ error: 'Failed to store photo' })
+      })
+  })
 })
 
 export default router

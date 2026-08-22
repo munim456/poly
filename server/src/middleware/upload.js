@@ -34,3 +34,24 @@ export const upload = multer({
     fileSize: 10 * 1024 * 1024, // 10MB limit
   }
 })
+
+// In-memory storage for images persisted to the database
+const imageFileFilter = (req, file, cb) => {
+  const allowedTypes = /jpeg|jpg|png|webp|gif/
+  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase())
+  const mimetype = allowedTypes.test(file.mimetype)
+
+  if (extname && mimetype) {
+    cb(null, true)
+  } else {
+    cb(new Error('Only photos (JPEG, PNG, WebP, GIF) are allowed'))
+  }
+}
+
+export const imageUpload = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: imageFileFilter,
+  limits: {
+    fileSize: 2 * 1024 * 1024, // 2MB limit per photo
+  }
+})

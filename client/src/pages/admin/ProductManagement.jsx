@@ -9,6 +9,8 @@ function ProductManagement() {
   const [loading, setLoading] = useState(true)
   const [editingProduct, setEditingProduct] = useState(null)
   const [showForm, setShowForm] = useState(false)
+  const [uploadingPhoto, setUploadingPhoto] = useState(false)
+  const [photoError, setPhotoError] = useState('')
 
   const [formData, setFormData] = useState({
     name: '',
@@ -19,6 +21,7 @@ function ProductManagement() {
     regular_moq: '',
     wholesale_moq: '',
     is_bargaining_allowed: true,
+    images: [],
   })
 
   useEffect(() => {
@@ -72,8 +75,37 @@ function ProductManagement() {
       regular_moq: product.regular_moq,
       wholesale_moq: product.wholesale_moq,
       is_bargaining_allowed: product.is_bargaining_allowed,
+      images: product.images || [],
     })
     setShowForm(true)
+  }
+
+  const handlePhotoSelect = async (e) => {
+    const file = e.target.files && e.target.files[0]
+    if (!file) return
+    setPhotoError('')
+    setUploadingPhoto(true)
+
+    try {
+      const data = new FormData()
+      data.append('image', file)
+      const res = await api.post('/admin/uploads', data, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      setFormData((prev) => ({ ...prev, images: [...prev.images, res.data.url] }))
+    } catch (error) {
+      setPhotoError(error.response?.data?.error || t('pm.photos.uploadFailed'))
+    } finally {
+      setUploadingPhoto(false)
+      e.target.value = ''
+    }
+  }
+
+  const removePhoto = (url) => {
+    setFormData((prev) => ({
+      ...prev,
+      images: prev.images.filter((img) => img !== url),
+    }))
   }
 
   const handleDelete = async (id) => {
@@ -97,7 +129,9 @@ function ProductManagement() {
       regular_moq: '',
       wholesale_moq: '',
       is_bargaining_allowed: true,
+      images: [],
     })
+    setPhotoError('')
   }
 
   return (
@@ -155,6 +189,36 @@ function ProductManagement() {
                       onChange={handleChange}
                       rows={3}
                     />
+                  </div>
+                  <div className={styles.fieldFull}>
+                    <label>{t('pm.photos.label')}</label>
+                    <div className={styles.photoGrid}>
+                      {formData.images.map((url) => (
+                        <div key={url} className={styles.photoThumb}>
+                          <img src={url} alt="" />
+                          <button
+                            type="button"
+                            className={styles.photoRemoveBtn}
+                            onClick={() => removePhoto(url)}
+                            title={t('common.delete')}
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
+                      <label className={styles.photoAddBtn}>
+                        {uploadingPhoto ? t('pm.photos.uploading') : t('pm.photos.add')}
+                        <input
+                          type="file"
+                          accept="image/jpeg,image/png,image/webp,image/gif"
+                          onChange={handlePhotoSelect}
+                          disabled={uploadingPhoto}
+                          hidden
+                        />
+                      </label>
+                    </div>
+                    {photoError && <span className={styles.photoError}>{photoError}</span>}
+                    <small className={styles.photoHint}>{t('pm.photos.hint')}</small>
                   </div>
                   <div className={styles.field}>
                     <label>{t('pm.regularPrice')}</label>

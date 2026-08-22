@@ -15,6 +15,7 @@ import negotiationRoutes from './routes/negotiations.js'
 import qualityRoutes from './routes/quality.js'
 import buyerRoutes from './routes/buyers.js'
 import adminRoutes from './routes/admin.js'
+import uploadsRoutes from './routes/uploads.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -41,6 +42,7 @@ app.use('/api/negotiations', negotiationRoutes)
 app.use('/api/quality', qualityRoutes)
 app.use('/api/buyers', buyerRoutes)
 app.use('/api/admin', adminRoutes)
+app.use('/api/uploads', uploadsRoutes)
 
 // Health check
 app.get('/api/health', (req, res) => {
